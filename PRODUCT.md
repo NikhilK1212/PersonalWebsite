@@ -24,11 +24,11 @@ Most student portfolio sites in this genre are either (a) generic AI-generated S
 
 ## Operating Context
 
-Single page, no internal navigation/routing. Viewed by recruiters on desktop primarily, but must work on mobile. No CMS, no backend; content changes are code edits. Real downloadable assets already in the repo: `assets/Nikhil_Krishna_Resume.pdf`, `assets/Penn_Electric_Racing_Brake_Pedal_Design.pdf`.
+Single page, no internal navigation/routing. Viewed by recruiters on desktop primarily, but must work on mobile. No CMS, no backend; content changes are code edits. Real downloadable assets already in the repo: `assets/Nikhil_Krishna_Resume.pdf`.
 
 ## Capabilities and Constraints
 
-- No fake or fabricated content anywhere: no fake reviews, testimonials, metrics, or customer counts. Every number/claim must trace to the resume, the two SSRN papers, or the PER design document already in the repo.
+- No fake or fabricated content anywhere: no fake reviews, testimonials, metrics, or customer counts. Every number/claim must trace to the resume or the two SSRN papers already in the repo.
 - No stock photography or AI-generated imagery. No real photo of Nikhil exists in the project yet; any figure/portrait-style element must use a real photo he supplies later, or a non-photographic (illustrated/typographic/object) stand-in until then.
 - Never launches until: a custom domain is connected, a favicon exists (already does: `assets/favicon.svg`), and no "Made with AI" watermark is present.
 - Banned stylistically, per explicit earlier instruction: purple gradients, pill-shaped buttons, emoji-as-icons, em dashes anywhere in copy or code comments, vague/generic hero copy, cursor-animation gimmicks done for their own sake rather than in service of the concept, over-the-top scroll animations, fake customer/visitor counters.
@@ -43,7 +43,6 @@ Single page, no internal navigation/routing. Viewed by recruiters on desktop pri
 ## Evidence on Hand
 
 - `assets/Nikhil_Krishna_Resume.pdf`: full resume (education, research, activities, certifications).
-- `assets/Penn_Electric_Racing_Brake_Pedal_Design.pdf`: an 11-page from-first-principles brake pedal design calculation for Penn Electric Racing's FSAE vehicle (pedal ratio, master cylinder bore, hydraulic pressure, structural load case).
 - Two published SSRN papers (real, with real abstract IDs used as links: ssrn.com/abstract=5367113 and ssrn.com/abstract=7271839): space debris ML surveillance framework, and a bioinspired CubeSat thermal control film from a NASA SEES internship.
 - No real photo of Nikhil is on hand. State this rather than substituting a stock or AI-generated one.
 

@@ -141,18 +141,28 @@ a, button { cursor: url('../assets/cursor-pencil.svg') 6 26, pointer; }
 .frame .bl { bottom: 14px; left: 14px; border-right: none; border-top: none; }
 .frame .br { bottom: 14px; right: 14px; border-left: none; border-top: none; }
 
-/* Sheet peeled up at the top corner, like a real blueprint print curling. */
+/* Sheet peeled up at the top corner, like a real blueprint print curling.
+   ::before is the shadow the lifted corner throws back onto the flat
+   sheet; ::after is the curled flap itself (the back of the paper),
+   bright where light catches the crease and darker as it curves away,
+   with its own drop-shadow (shape-following, unlike box-shadow) so the
+   flap reads as lifted off the page rather than a flat cutout. */
 .corner-fold {
   position: fixed;
   top: 0;
   right: 0;
-  width: 72px;
-  height: 72px;
+  width: 92px;
+  height: 92px;
   z-index: 2;
   pointer-events: none;
-  clip-path: polygon(100% 0, 0 0, 100% 100%);
-  background: linear-gradient(225deg, var(--bg) 0%, var(--bg) 40%, var(--bg-deep) 41%, var(--bg-deep) 100%);
-  box-shadow: -10px 8px 16px rgba(4, 12, 22, 0.45);
+}
+
+.corner-fold::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  clip-path: polygon(0 0, 100% 100%, 0 100%);
+  background: linear-gradient(135deg, rgba(4, 12, 22, 0.55) 0%, rgba(4, 12, 22, 0.24) 14%, transparent 32%);
 }
 
 .corner-fold::after {
@@ -160,7 +170,10 @@ a, button { cursor: url('../assets/cursor-pencil.svg') 6 26, pointer; }
   position: absolute;
   inset: 0;
   clip-path: polygon(100% 0, 0 0, 100% 100%);
-  background: linear-gradient(225deg, rgba(246, 249, 252, 0.14), transparent 55%);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 9%),
+    linear-gradient(45deg, #e7edf3 0%, #aab9c9 42%, #57687c 100%);
+  filter: drop-shadow(-4px 5px 7px rgba(4, 12, 22, 0.5));
 }
 
 /* ---------------- Layout ---------------- */
@@ -329,7 +342,7 @@ li::marker { color: var(--ink-faint); }
 
 @keyframes spin-cw {
   from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  to { transform: rotate(-360deg); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -350,13 +363,6 @@ li::marker { color: var(--ink-faint); }
 
 .contact-row a { font-size: 1rem; }
 
-.personal-line {
-  font-family: var(--font-hand);
-  color: var(--ink);
-  font-size: 1.5rem;
-  transform: rotate(-0.6deg);
-}
-
 .proof-link {
   font-family: var(--font-display);
   font-weight: 600;
@@ -371,4 +377,5 @@ li::marker { color: var(--ink-faint); }
   }
   .fact-block.reverse .fact-figure { order: 0; }
   .fact-figure { max-width: 220px; margin: 0 auto; }
+  .corner-fold { width: 44px; height: 44px; }
 }
