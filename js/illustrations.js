@@ -84,13 +84,13 @@
     mount.appendChild(rc.path('M0,84 L26,84 L26,80 L4,78 Z', Object.assign({}, lineOpts, { seed: 66 })));
     mount.appendChild(rc.rectangle(0, 76, 3, 10, Object.assign({}, plateOpts, { seed: 67 })));
 
-    mount.appendChild(rc.line(160, 66, 160, 32, Object.assign({}, lineOpts, { seed: 68 })));
-    mount.appendChild(rc.line(190, 66, 190, 32, Object.assign({}, lineOpts, { seed: 69 })));
-    mount.appendChild(rc.rectangle(155, 26, 40, 7, {
+    mount.appendChild(rc.line(148, 57, 148, 28, Object.assign({}, lineOpts, { seed: 68 })));
+    mount.appendChild(rc.line(161, 65, 161, 28, Object.assign({}, lineOpts, { seed: 69 })));
+    mount.appendChild(rc.rectangle(140, 22, 44, 7, {
       roughness: 1.6, stroke: COLOR.accentLine, strokeWidth: 1.5, fill: COLOR.bg, fillStyle: 'solid', seed: 70
     }));
-    mount.appendChild(rc.rectangle(152, 22, 3, 20, Object.assign({}, plateOpts, { seed: 71 })));
-    mount.appendChild(rc.rectangle(195, 22, 3, 20, Object.assign({}, plateOpts, { seed: 72 })));
+    mount.appendChild(rc.rectangle(137, 18, 3, 18, Object.assign({}, plateOpts, { seed: 71 })));
+    mount.appendChild(rc.rectangle(181, 18, 3, 18, Object.assign({}, plateOpts, { seed: 72 })));
     mount.appendChild(rc.line(150, 88, 162, 80, Object.assign({}, lineOpts, { seed: 73 })));
 
     buildWheel(document.getElementById('carWheelFront'), 14, 74);
