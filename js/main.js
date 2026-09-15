@@ -1,19 +1,23 @@
-document.getElementById('year').textContent = new Date().getFullYear();
+var root = document.documentElement;
+var toggle = document.getElementById('themeToggle');
 
-var navToggle = document.getElementById('navToggle');
-var siteNav = document.querySelector('.site-nav');
-
-if (navToggle && siteNav) {
-  navToggle.addEventListener('click', function () {
-    var isOpen = siteNav.classList.toggle('is-open');
-    navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-  });
-
-  siteNav.querySelectorAll('a').forEach(function (link) {
-    link.addEventListener('click', function () {
-      siteNav.classList.remove('is-open');
-      navToggle.setAttribute('aria-expanded', 'false');
-    });
-  });
+function applyTheme(theme) {
+  if (theme === 'light') {
+    root.setAttribute('data-theme', 'light');
+    toggle.textContent = 'dark';
+  } else {
+    root.removeAttribute('data-theme');
+    toggle.textContent = 'light';
+  }
 }
 
+var saved = null;
+try { saved = localStorage.getItem('theme'); } catch (e) {}
+applyTheme(saved === 'light' ? 'light' : 'dark');
+
+toggle.addEventListener('click', function () {
+  var isLight = root.getAttribute('data-theme') === 'light';
+  var next = isLight ? 'dark' : 'light';
+  applyTheme(next);
+  try { localStorage.setItem('theme', next); } catch (e) {}
+});
