@@ -13,8 +13,22 @@
 <div class="frame" aria-hidden="true">
   <i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i>
 </div>
+<div class="corner-fold" aria-hidden="true"></div>
 
 <main class="page">
+
+  <div class="side-deco left" aria-hidden="true">
+    <div class="doodle" style="top:60px"><svg class="doodle-svg" id="doodleL1" viewBox="0 0 60 60"></svg></div>
+    <div class="doodle" style="top:420px"><svg class="doodle-svg" id="doodleL2" viewBox="0 0 60 60"></svg></div>
+    <div class="doodle" style="top:780px"><svg class="doodle-svg" id="doodleL3" viewBox="0 0 60 60"></svg></div>
+    <div class="doodle" style="top:1140px"><svg class="doodle-svg" id="doodleL4" viewBox="0 0 60 60"></svg></div>
+  </div>
+  <div class="side-deco right" aria-hidden="true">
+    <div class="doodle" style="top:240px"><svg class="doodle-svg" id="doodleR1" viewBox="0 0 60 60"></svg></div>
+    <div class="doodle" style="top:600px"><svg class="doodle-svg" id="doodleR2" viewBox="0 0 60 60"></svg></div>
+    <div class="doodle" style="top:960px"><svg class="doodle-svg" id="doodleR3" viewBox="0 0 60 60"></svg></div>
+    <div class="doodle" style="top:1320px"><svg class="doodle-svg" id="doodleR4" viewBox="0 0 60 60"></svg></div>
+  </div>
 
   <h1 class="name">Nikhil Krishna</h1>
   <p class="kicker">Mechanical Engineering &amp; Applied Mechanics, University of Pennsylvania</p>
@@ -24,8 +38,7 @@
 
     <p>
       i'm studying <strong>Mechanical Engineering &amp; Applied Mechanics at the University of
-      Pennsylvania</strong>, Class of 2030. i like engineering that gets checked against something
-      real: an FSAE rulebook, a flight environment, a validation dataset, not just a grading rubric.
+      Pennsylvania</strong>, Class of 2030.
     </p>
 
     <p>before Penn, at <strong>TJHSST</strong>, i kept busy:</p>
@@ -34,10 +47,10 @@
   <div class="fact-block">
     <p>
       as a <strong>NASA SEES</strong> research intern at UT Austin (5% acceptance rate), i proposed
-      a bioinspired PDMS film for passive CubeSat thermal control: no moving parts, no power draw,
-      just the right coating in the right place. i separately researched CubeSat digipeater
-      software at <strong>George Washington University</strong>.
+      a bioinspired PDMS film for passive CubeSat thermal control.
       <a class="proof-link" href="https://ssrn.com/abstract=7271839" target="_blank" rel="noopener">Read the paper &rarr;</a>
+      i separately researched CubeSat digipeater software at <strong>George Washington
+      University</strong>.
     </p>
     <figure class="fact-figure">
       <svg class="fact-art" id="satSvg" viewBox="0 0 200 200" aria-hidden="true">
@@ -46,7 +59,6 @@
           <circle class="sat-light" cx="118" cy="60" r="2.5" />
         </g>
       </svg>
-      <figcaption>Fig. 2: 1U CubeSat, PDMS film on the anti-sun face for passive thermal control.</figcaption>
     </figure>
   </div>
 
@@ -58,12 +70,11 @@
         <path id="orbitB" class="orbit" d="M 32,58 A 74,26 0 1,0 188,58 A 74,26 0 1,0 32,58" />
         <g id="debrisFrags"></g>
       </svg>
-      <figcaption>Fig. 1: Space debris field, tracked with a YOLOv8 detector and a physics-informed trajectory model.</figcaption>
     </figure>
     <p>
       for <strong>ISEF</strong>, i built a machine learning framework for space debris
-      surveillance: a YOLOv8 detector for tracking paired with a physics-informed trajectory model.
-      it placed 4th in Physics &amp; Astronomy and picked up <strong>12 awards</strong> along the way.
+      surveillance. it placed 4th in Physics &amp; Astronomy and picked up <strong>12
+      awards</strong> along the way.
       <a class="proof-link" href="https://ssrn.com/abstract=5367113" target="_blank" rel="noopener">Read the paper &rarr;</a>
     </p>
   </div>
@@ -78,10 +89,11 @@
 
   <div class="fact-block">
     <p>
-      this fall i started at Penn, where i'm on the mechanical side of <strong>Penn Electric
-      Racing</strong>. i've been working the brake system: a pedal ratio of 6.0, a 0.578&Prime;
+      my application to <strong>Penn Electric Racing</strong> required the rigorous
+      first-principles derivation of a full braking system: a pedal ratio of 6.0, a 0.578&Prime;
       master cylinder bore, checked against a 1500&nbsp;N structural load case straight out of the
-      FSAE rulebook.
+      FSAE rulebook. now i'm contributing to the vehicle dynamics team, working toward the team's
+      larger goal of moving the car from rear-wheel to four-wheel drive.
       <a class="proof-link" href="assets/Penn_Electric_Racing_Brake_Pedal_Design.pdf" target="_blank" rel="noopener">Read the design doc &rarr;</a>
     </p>
     <figure class="fact-figure">
@@ -92,15 +104,7 @@
           <g id="carWheelRear" transform="translate(160,98)"><g class="car-wheel-spin"></g></g>
         </g>
       </svg>
-      <figcaption>Fig. 3: FSAE electric vehicle, mechanical scope: brake pedal design and structural load case.</figcaption>
     </figure>
-  </div>
-
-  <div class="copy">
-    <p>
-      i'm looking for a mechanical engineering internship where i can keep building hardware
-      that actually gets tested, not just modeled.
-    </p>
   </div>
 
   <hr>
@@ -110,8 +114,6 @@
     <a href="assets/Nikhil_Krishna_Resume.pdf" target="_blank" rel="noopener">Resume</a>
     <a href="https://www.linkedin.com/in/nikhil-rao-krishna" target="_blank" rel="noopener">LinkedIn</a>
   </div>
-
-  <p class="tagline">brakes, cubesats, and the math in between</p>
 </main>
 
 <script src="js/vendor/rough.js"></script>

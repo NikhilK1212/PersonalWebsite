@@ -207,6 +207,55 @@
     });
   }
 
+  /* ---------------- Margin doodles (generic, decorative only) ---------------- */
+
+  function drawGearIcon(rc, mount, seed) {
+    var lineOpts = { roughness: 1.8, stroke: COLOR.inkFaint, strokeWidth: 1.4, fill: 'none', seed: seed };
+    mount.appendChild(rc.circle(30, 30, 32, lineOpts));
+    mount.appendChild(rc.circle(30, 30, 11, Object.assign({}, lineOpts, { seed: seed + 1 })));
+    for (var i = 0; i < 8; i++) {
+      var g = document.createElementNS(SVGNS, 'g');
+      g.setAttribute('transform', 'rotate(' + (i * 45) + ' 30 30)');
+      g.appendChild(rc.rectangle(27, 7, 6, 8, Object.assign({}, lineOpts, { seed: seed + 2 + i })));
+      mount.appendChild(g);
+    }
+  }
+
+  function drawRocketIcon(rc, mount, seed) {
+    var lineOpts = { roughness: 1.8, stroke: COLOR.inkFaint, strokeWidth: 1.4, fill: 'none', seed: seed };
+    mount.appendChild(rc.path('M24,22 L30,6 L36,22 Z', lineOpts));
+    mount.appendChild(rc.rectangle(24, 22, 12, 24, Object.assign({}, lineOpts, { seed: seed + 1 })));
+    mount.appendChild(rc.path('M24,38 L15,50 L24,45 Z', Object.assign({}, lineOpts, { seed: seed + 2 })));
+    mount.appendChild(rc.path('M36,38 L45,50 L36,45 Z', Object.assign({}, lineOpts, { seed: seed + 3 })));
+    mount.appendChild(rc.circle(30, 28, 6, Object.assign({}, lineOpts, { seed: seed + 4 })));
+  }
+
+  function drawWrenchIcon(rc, mount, seed) {
+    var lineOpts = { roughness: 1.8, stroke: COLOR.inkFaint, strokeWidth: 1.5, fill: 'none', seed: seed };
+    mount.appendChild(rc.line(16, 46, 42, 18, lineOpts));
+    mount.appendChild(rc.circle(13, 49, 15, Object.assign({}, lineOpts, { seed: seed + 1 })));
+    mount.appendChild(rc.circle(46, 14, 11, Object.assign({}, lineOpts, { seed: seed + 2 })));
+  }
+
+  function drawBoltIcon(rc, mount, seed) {
+    var lineOpts = { roughness: 1.8, stroke: COLOR.inkFaint, strokeWidth: 1.4, fill: 'none', seed: seed };
+    mount.appendChild(rc.polygon([[46, 30], [38, 44], [22, 44], [14, 30], [22, 16], [38, 16]], lineOpts));
+    mount.appendChild(rc.circle(30, 30, 15, Object.assign({}, lineOpts, { seed: seed + 1 })));
+  }
+
+  var DOODLE_KINDS = [drawGearIcon, drawRocketIcon, drawWrenchIcon, drawBoltIcon];
+
+  function buildSideDoodles() {
+    var ids = ['doodleL1', 'doodleL2', 'doodleL3', 'doodleL4', 'doodleR1', 'doodleR2', 'doodleR3', 'doodleR4'];
+    ids.forEach(function (id, i) {
+      var svg = document.getElementById(id);
+      if (!svg) return;
+      var rc = rough.svg(svg);
+      DOODLE_KINDS[i % DOODLE_KINDS.length](rc, svg, 100 + i * 10);
+      drawOn(id, id);
+    });
+  }
+
   /* ---------------- Hand-drawn line reveal (anime.js) ---------------- */
 
   function drawOn(svgId, mountId) {
@@ -229,6 +278,7 @@
     buildCubesat();
     buildCar();
     buildDebris();
+    buildSideDoodles();
     drawOn('satSvg', 'satMount');
     drawOn('carSvg', 'carMount');
     drawOn('debrisSvg', 'debrisMount');
