@@ -24,3 +24,15 @@ FIRST VIEWPORT: hanging badge top-right on a cord; name centered, dim until the 
 FORM: engineering-instrumentation/workshop-desk world; treated as the brief-pinned direction (concept-seed ran degraded, seed key 8c441959, assigned index 5 of a notional 7; brief-pinned decisions beat the roll per new-work.md).
 
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance.
+
+## Revision 2 (user course-correction, supersedes parts of the contract above)
+
+After the first finish review (disposition: fix), the user clarified live in conversation that the reference site was meant only as an example of what "dynamic" can look like, not a template to reskin literally. Explicit corrections, which override the original OWN-WORLD/STORY language above:
+
+- No cursor-tracking spotlight/lamp of any kind ("this isn't a movie"). Removed entirely, including the hover-reveal-name mechanic that depended on it. The name is now simply always visible, centered, static.
+- Accent color changed from amber/orange to blue (`--accent: #4da6ff`, `--accent-dim: #234058`), explicitly because amber/orange was rejected.
+- Typography changed from IBM Plex Mono (a "typewriter" look, rejected) to Titillium Web, a clean grotesque sans with a technical/aerospace design heritage, used throughout instead of monospace.
+- Added a genuinely mechanical dynamic element requested by name: two meshed SVG gears (10-tooth and 8-tooth polygons) that continuously counter-rotate at an angular-velocity ratio matching their tooth counts, paused under `prefers-reduced-motion`. This, not a cursor effect, is now the page's signature "dynamic" element.
+- Kept from the original contract: the hanging badge (swings on hover/click), the tearable credential tags (now linking out to the real SSRN papers and the PER brake design PDF, per the first finish review's fix items), the split-flap role display, and the drafting-sheet corner registration marks.
+
+This revision has not yet been through a fresh finish review; the reviewer's remaining "fix" items from the first pass that are still relevant (proof links, corner frame) were already applied before this revision and are unaffected by it.

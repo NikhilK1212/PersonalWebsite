@@ -1,46 +1,7 @@
 (function () {
   'use strict';
 
-  var canHover = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  /* ---------------- Lamp / cursor spotlight + name glow ---------------- */
-
-  var lamp = document.getElementById('lamp');
-  var nameHeading = document.getElementById('nameHeading');
-
-  if (canHover && lamp) {
-    var root = document.documentElement;
-    var nameRect = null;
-
-    function refreshNameRect() {
-      if (nameHeading) nameRect = nameHeading.getBoundingClientRect();
-    }
-    refreshNameRect();
-    window.addEventListener('resize', refreshNameRect);
-
-    window.addEventListener('mousemove', function (e) {
-      root.style.setProperty('--lx', e.clientX + 'px');
-      root.style.setProperty('--ly', e.clientY + 'px');
-      lamp.classList.add('is-active');
-
-      if (nameHeading && nameRect) {
-        var cx = nameRect.left + nameRect.width / 2;
-        var cy = nameRect.top + nameRect.height / 2;
-        var dx = e.clientX - cx;
-        var dy = e.clientY - cy;
-        var dist = Math.sqrt(dx * dx + dy * dy);
-        var maxDist = 420;
-        var t = Math.max(0, 1 - dist / maxDist);
-        nameHeading.style.setProperty('--glow', (18 * t) + 'px');
-        nameHeading.style.setProperty('--glow-a', (0.55 * t).toFixed(2));
-      }
-    });
-
-    window.addEventListener('mouseleave', function () {
-      lamp.classList.remove('is-active');
-    });
-  }
 
   /* ---------------- Hanging badge swing ---------------- */
 
