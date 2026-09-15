@@ -293,7 +293,7 @@ li::marker { color: var(--ink-faint); }
 /* ---------------- Contact / footer ---------------- */
 
 .contact-row {
-  justify-content: flex-start;
+  justify-content: center;
   gap: 32px;
   flex-wrap: wrap;
   margin-bottom: 36px;
