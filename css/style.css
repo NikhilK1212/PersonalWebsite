@@ -108,10 +108,10 @@ body {
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   position: relative;
-  cursor: url('../assets/cursor-pencil.svg') 6 29, auto;
+  cursor: url('../assets/cursor-pencil.svg') 6 26, auto;
 }
 
-a, button { cursor: url('../assets/cursor-pencil.svg') 6 29, pointer; }
+a, button { cursor: url('../assets/cursor-pencil.svg') 6 26, pointer; }
 
 ::selection { background: var(--accent-dim); color: var(--ink); }
 
@@ -177,20 +177,20 @@ a, button { cursor: url('../assets/cursor-pencil.svg') 6 29, pointer; }
 .side-deco {
   position: absolute;
   top: 0;
-  width: 90px;
+  width: 150px;
   height: 100%;
   pointer-events: none;
   display: none;
 }
 
-.side-deco.left { right: 100%; margin-right: 40px; }
-.side-deco.right { left: 100%; margin-left: 40px; }
+.side-deco.left { right: 100%; margin-right: 30px; }
+.side-deco.right { left: 100%; margin-left: 30px; }
 
 .doodle {
   position: absolute;
-  width: 60px;
-  height: 60px;
-  opacity: 0.28;
+  width: 116px;
+  height: 116px;
+  opacity: 0.4;
 }
 
 .side-deco.left .doodle:nth-child(odd) { transform: rotate(-6deg); }
