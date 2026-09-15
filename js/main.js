@@ -3,28 +3,6 @@
 
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---------------- Hanging badge swing ---------------- */
-
-  var badgeRig = document.querySelector('.badge-rig');
-  var badge = document.getElementById('badge');
-
-  function triggerSwing() {
-    if (!badgeRig || reduceMotion) return;
-    badgeRig.classList.remove('swing');
-    void badgeRig.offsetWidth;
-    badgeRig.classList.add('swing');
-  }
-
-  if (badge) {
-    badge.addEventListener('click', triggerSwing);
-    badge.addEventListener('pointerenter', triggerSwing);
-    if (badgeRig) {
-      badgeRig.addEventListener('animationend', function (e) {
-        if (e.animationName === 'swing') badgeRig.classList.remove('swing');
-      });
-    }
-  }
-
   /* ---------------- Credential tags (tear to reveal) ---------------- */
 
   document.querySelectorAll('.cred-tag').forEach(function (tag) {

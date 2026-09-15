@@ -14,50 +14,12 @@
   <i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i>
 </div>
 
-<div class="side-cubesat" aria-hidden="true">
-  <svg viewBox="0 0 100 100">
-    <g class="cubesat-spin">
-      <rect class="sat-panel" x="2" y="41" width="27" height="18" />
-      <line class="sat-panel-line" x1="9" y1="41" x2="9" y2="59" />
-      <line class="sat-panel-line" x1="16" y1="41" x2="16" y2="59" />
-      <line class="sat-panel-line" x1="23" y1="41" x2="23" y2="59" />
-      <rect class="sat-panel" x="71" y="41" width="27" height="18" />
-      <line class="sat-panel-line" x1="78" y1="41" x2="78" y2="59" />
-      <line class="sat-panel-line" x1="85" y1="41" x2="85" y2="59" />
-      <line class="sat-panel-line" x1="92" y1="41" x2="92" y2="59" />
-      <rect class="sat-body" x="35" y="35" width="30" height="30" rx="3" />
-      <line class="sat-antenna" x1="50" y1="35" x2="38" y2="14" />
-      <circle class="sat-antenna-tip" cx="38" cy="14" r="2.5" />
-    </g>
-  </svg>
-</div>
-
-<div class="side-car" aria-hidden="true">
-  <svg viewBox="0 0 160 80">
-    <line class="car-wing-strut" x1="126" y1="34" x2="126" y2="20" />
-    <line class="car-wing-strut" x1="140" y1="34" x2="140" y2="20" />
-    <rect class="car-wing" x="120" y="14" width="26" height="6" rx="1" />
-    <path class="car-body" d="M8,55 L8,46 Q8,37 18,37 L44,37 Q54,21 76,21 L100,21 Q114,21 119,37 L142,37 Q152,37 152,46 L152,55 Z" />
-    <g class="car-wheel" style="transform-origin: 35px 60px;">
-      <circle cx="35" cy="60" r="14" />
-      <line x1="35" y1="48" x2="35" y2="72" />
-      <line x1="23" y1="60" x2="47" y2="60" />
-      <line x1="26.5" y1="51.5" x2="43.5" y2="68.5" />
-      <line x1="26.5" y1="68.5" x2="43.5" y2="51.5" />
-    </g>
-    <g class="car-wheel" style="transform-origin: 120px 60px;">
-      <circle cx="120" cy="60" r="14" />
-      <line x1="120" y1="48" x2="120" y2="72" />
-      <line x1="108" y1="60" x2="132" y2="60" />
-      <line x1="111.5" y1="51.5" x2="128.5" y2="68.5" />
-      <line x1="111.5" y1="68.5" x2="128.5" y2="51.5" />
-    </g>
-  </svg>
-</div>
-
 <main class="page">
 
-  <div class="top-strip">
+  <h1 class="name">Nikhil Krishna</h1>
+  <p class="kicker">Mechanical Engineering &amp; Applied Mechanics, University of Pennsylvania</p>
+
+  <div class="control-row">
     <div class="gearworks" aria-hidden="true">
       <svg class="gear gear-big" viewBox="0 0 120 120">
         <polygon points="118.00,60.00 117.29,69.07 103.75,74.21 100.99,80.88 106.92,94.09 101.01,101.01 87.04,97.21 80.88,100.99 77.92,115.16 69.07,117.29 60.00,106.00 52.80,105.43 42.08,115.16 33.67,111.68 32.96,97.21 27.47,92.53 13.08,94.09 8.32,86.33 16.25,74.21 14.57,67.20 2.00,60.00 2.71,50.93 16.25,45.79 19.01,39.12 13.08,25.91 18.99,18.99 32.96,22.79 39.12,19.01 42.08,4.84 50.93,2.71 60.00,14.00 67.20,14.57 77.92,4.84 86.33,8.32 87.04,22.79 92.53,27.47 106.92,25.91 111.68,33.67 103.75,45.79 105.43,52.80" />
@@ -69,22 +31,9 @@
       </svg>
     </div>
 
-    <div class="badge-rig">
-      <svg class="badge-cord" viewBox="0 0 40 90" aria-hidden="true">
-        <path d="M8 0 C8 30, 32 20, 32 50" />
-      </svg>
-      <button class="badge" id="badge" type="button" aria-label="ID badge, click to swing it">
-        <span class="badge-clip"></span>
-        <span class="badge-photo" aria-hidden="true">
-          <svg viewBox="0 0 64 64"><rect x="2" y="2" width="60" height="60" rx="3"/><path d="M16 46c2-10 8-15 16-15s14 5 16 15" /><circle cx="32" cy="24" r="9"/></svg>
-        </span>
-        <span class="badge-text">
-          <span class="badge-name">N. KRISHNA</span>
-          <span class="badge-role">MECH E &middot; PENN</span>
-          <span class="badge-id">NO. 2030</span>
-        </span>
-      </button>
-    </div>
+    <button class="flip-board" id="flipBoard" type="button" aria-label="cycle through roles">
+      <span class="flip-cells" id="flipCells"></span>
+    </button>
   </div>
 
   <div class="tag-rack" id="tagRack">
@@ -138,12 +87,6 @@
 
   </div>
 
-  <h1 class="name" id="nameHeading">Nikhil Krishna</h1>
-
-  <button class="flip-board" id="flipBoard" type="button" aria-label="cycle through roles">
-    <span class="flip-cells" id="flipCells"></span>
-  </button>
-
   <div class="copy">
     <p class="personal-line">i like building things that have to work.</p>
 
@@ -163,7 +106,101 @@
       <li>led <strong>TJ Space Program</strong> as Co-President, directing CAD work on a high-altitude balloon payload</li>
       <li>graduated with a <strong>3.96 GPA</strong> and was named a National Merit Commended Scholar</li>
     </ul>
+  </div>
 
+  <div class="plates">
+
+    <figure class="plate">
+      <svg class="plate-art" viewBox="0 0 220 150" aria-hidden="true">
+        <circle class="debris-earth" cx="110" cy="232" r="110" />
+        <path id="orbitA" class="orbit" d="M 15,88 A 95,40 0 1,0 205,88 A 95,40 0 1,0 15,88" />
+        <path id="orbitB" class="orbit" d="M 32,58 A 74,26 0 1,0 188,58 A 74,26 0 1,0 32,58" />
+        <path class="debris-cross" d="M60,42 L60,50 M56,46 L64,46" />
+        <path class="debris-cross" d="M168,72 L168,80 M164,76 L172,76" />
+        <g class="debris-frag">
+          <rect x="-2.5" y="-2" width="5" height="4" />
+          <animateMotion dur="13s" repeatCount="indefinite" rotate="auto">
+            <mpath href="#orbitA"></mpath>
+          </animateMotion>
+        </g>
+        <g class="debris-frag">
+          <rect x="-1.5" y="-1.5" width="3" height="3" />
+          <animateMotion dur="9s" repeatCount="indefinite" rotate="auto" begin="-3s">
+            <mpath href="#orbitA"></mpath>
+          </animateMotion>
+        </g>
+        <g class="debris-frag">
+          <path d="M-3,0 L0,-3 L3,0 L0,3 Z" />
+          <animateMotion dur="7s" repeatCount="indefinite" rotate="auto" begin="-1s">
+            <mpath href="#orbitB"></mpath>
+          </animateMotion>
+        </g>
+      </svg>
+      <figcaption>Fig. 1: Space debris field, tracked with a YOLOv8 detector and a physics-informed trajectory model.</figcaption>
+    </figure>
+
+    <figure class="plate">
+      <svg class="plate-art" viewBox="0 0 200 200" aria-hidden="true">
+        <polygon class="sat-face sat-face-top" points="100,42 148,66 100,90 52,66" />
+        <polygon class="sat-face" points="52,66 100,90 100,148 52,124" />
+        <polygon class="sat-face" points="100,90 148,66 148,124 100,148" />
+        <line class="sat-panel-line" x1="76" y1="78" x2="76" y2="136" />
+        <line class="sat-panel-line" x1="124" y1="78" x2="124" y2="136" />
+        <line class="sat-panel-line" x1="52" y1="95" x2="100" y2="119" />
+        <line class="sat-panel-line" x1="100" y1="119" x2="148" y2="95" />
+        <line class="sat-rail" x1="52" y1="66" x2="52" y2="124" />
+        <line class="sat-rail" x1="100" y1="90" x2="100" y2="148" />
+        <line class="sat-rail" x1="148" y1="66" x2="148" y2="124" />
+        <circle class="sat-bolt" cx="52" cy="66" r="2" />
+        <circle class="sat-bolt" cx="52" cy="124" r="2" />
+        <circle class="sat-bolt" cx="148" cy="66" r="2" />
+        <circle class="sat-bolt" cx="148" cy="124" r="2" />
+        <circle class="sat-bolt" cx="100" cy="90" r="2" />
+        <circle class="sat-bolt" cx="100" cy="148" r="2" />
+        <line class="sat-antenna" x1="100" y1="60" x2="82" y2="26" />
+        <circle class="sat-antenna-tip" cx="82" cy="26" r="2.5" />
+        <circle class="sat-light" cx="112" cy="58" r="2.5" />
+      </svg>
+      <figcaption>Fig. 2: 1U CubeSat, PDMS microstructured film mounted on the anti-sun face for passive thermal control.</figcaption>
+    </figure>
+
+    <figure class="plate">
+      <svg class="plate-art" viewBox="0 0 260 130" aria-hidden="true">
+        <path class="car-body" d="M8,82 C10,74 16,69 26,68 L48,66 C58,50 74,40 92,38 L118,38 C126,38 132,42 136,48 L150,52 C158,54 163,58 165,64 L165,84 Z" />
+        <path class="car-line" d="M82,38 C82,30 92,30 92,38" />
+        <ellipse class="car-cockpit" cx="80" cy="48" rx="8" ry="4.5" />
+        <path class="car-wing-line" d="M0,84 L26,84 L26,80 L4,78 Z" />
+        <rect class="car-wing-plate" x="0" y="76" width="3" height="10" />
+        <line class="car-line" x1="160" y1="64" x2="160" y2="34" />
+        <line class="car-line" x1="190" y1="64" x2="190" y2="34" />
+        <rect class="car-wing" x="155" y="28" width="40" height="7" />
+        <rect class="car-wing-plate" x="152" y="24" width="3" height="20" />
+        <rect class="car-wing-plate" x="195" y="24" width="3" height="20" />
+        <g transform="translate(35,96)">
+          <g class="car-wheel-spin">
+            <circle r="14" />
+            <line x1="0" y1="-10" x2="0" y2="10" />
+            <line x1="-10" y1="0" x2="10" y2="0" />
+            <line x1="-7" y1="-7" x2="7" y2="7" />
+            <line x1="-7" y1="7" x2="7" y2="-7" />
+          </g>
+        </g>
+        <g transform="translate(160,98)">
+          <g class="car-wheel-spin">
+            <circle r="18" />
+            <line x1="0" y1="-13" x2="0" y2="13" />
+            <line x1="-13" y1="0" x2="13" y2="0" />
+            <line x1="-9" y1="-9" x2="9" y2="9" />
+            <line x1="-9" y1="9" x2="9" y2="-9" />
+          </g>
+        </g>
+      </svg>
+      <figcaption>Fig. 3: Formula SAE electric vehicle, mechanical scope: brake pedal design and structural load case.</figcaption>
+    </figure>
+
+  </div>
+
+  <div class="copy">
     <p>
       this fall i started at Penn, where i'm on the mechanical side of <strong>Penn Electric
       Racing</strong>, working through brake system design calculations against the FSAE rulebook.

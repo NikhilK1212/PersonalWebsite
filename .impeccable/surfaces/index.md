@@ -36,3 +36,17 @@ After the first finish review (disposition: fix), the user clarified live in con
 - Kept from the original contract: the hanging badge (swings on hover/click), the tearable credential tags (now linking out to the real SSRN papers and the PER brake design PDF, per the first finish review's fix items), the split-flap role display, and the drafting-sheet corner registration marks.
 
 This revision has not yet been through a fresh finish review; the reviewer's remaining "fix" items from the first pass that are still relevant (proof links, corner frame) were already applied before this revision and are unaffected by it.
+
+## Revision 3 (user course-correction: commit fully to a real blueprint)
+
+User supplied three real reference photos (a CubeSat, the actual Penn Electric Racing car, a space-debris field illustration) and asked for a genuine cyanotype blueprint, not a dark theme with a faint grid tint. Also called out the car/CubeSat icons from Revision 2 as looking wrong and randomly placed, and asked what "skills" would fix it; the honest answer given was that hand-authored representational SVG icons (a cartoon car, a cartoon satellite) were the wrong approach regardless of skill, since no image-generation tool is available in this environment. Pivoted to line-art blueprint schematics instead, which suits hand-authored SVG far better than representational icons do.
+
+- Full color change to an actual blueprint palette: `--bg: #163a5c` (blueprint blue), `--ink`/`--ink-soft` near-white/light-blue for high contrast, `--accent: #ff7a63` (a "redline" red, referencing how engineers redline blueprints in red pen/pencil, used for every interactive element).
+- Real two-scale grid (17px fine + 170px coarse) over the whole page, styled as blueprint graph paper rather than a generic UI grid tint.
+- `Allerta Stencil` added for the name, section-like labels, tag stamps, and figure captions (genuine blueprint/drafting lettering); body copy stays in Titillium Web for readability.
+- Removed the hanging ID-badge element entirely. The name is now the literal first element on the page, large and centered.
+- Replaced the sidebar car/CubeSat icons with three bordered "figure plates" (styled after the real Figure 1/2/3 captions in the PER brake design PDF already in the repo), each a proper blueprint line-art schematic drawn from the user's reference photos, placed in-flow directly after the bullet list that discusses all three topics (not fixed-position, not hidden on any viewport):
+  - Fig. 1: space debris field, orbiting the Earth's limb, with 3 fragments actually animated along dashed orbit paths via SVG `animateMotion` (genuine orbital motion, not decorative).
+  - Fig. 2: isometric 1U CubeSat with corner rails and solar-panel paneling, plus a blinking telemetry-light accent.
+  - Fig. 3: FSAE open-wheel car side profile (nose, cockpit, rear wing with endplates, exposed wheels), with the wheels actually spinning.
+- Fixed two real bugs found while building this: the Earth-limb circle bled out of its frame into the caption (`.plate-art` had `overflow: visible`; changed to `hidden`), and the car's wheel-spin animation drifted away from the car body at this smaller render scale (`transform-box: fill-box` with pixel-value `transform-origin` doesn't scale correctly; fixed by wrapping each wheel in a `translate(cx,cy)` group and spinning an inner group centered on local origin with percentage-based `transform-origin: 50% 50%`).
