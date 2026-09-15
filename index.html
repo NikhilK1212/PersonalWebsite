@@ -10,40 +10,107 @@
 </head>
 <body>
 
+<div class="lamp" id="lamp" aria-hidden="true"></div>
+
 <main class="page">
-  <div class="row top-row">
-    <h1>Nikhil Krishna</h1>
-    <button id="themeToggle" class="theme-toggle" type="button">light</button>
+
+  <div class="rig">
+    <div class="badge-rig">
+      <svg class="badge-cord" viewBox="0 0 40 90" aria-hidden="true">
+        <path d="M8 0 C8 30, 32 20, 32 50" />
+      </svg>
+      <button class="badge" id="badge" type="button" aria-label="ID badge, click to swing it">
+        <span class="badge-clip"></span>
+        <span class="badge-photo" aria-hidden="true">
+          <svg viewBox="0 0 64 64"><rect x="2" y="2" width="60" height="60" rx="3"/><path d="M16 46c2-10 8-15 16-15s14 5 16 15" /><circle cx="32" cy="24" r="9"/></svg>
+        </span>
+        <span class="badge-text">
+          <span class="badge-name">N. KRISHNA</span>
+          <span class="badge-role">MECH E &middot; PENN</span>
+          <span class="badge-id">NO. 2030</span>
+        </span>
+      </button>
+    </div>
   </div>
 
-  <p class="personal-line">i like building things that have to work.</p>
+  <div class="tag-rack" id="tagRack">
 
-  <p>
-    i'm studying <strong>Mechanical Engineering &amp; Applied Mechanics at the University of
-    Pennsylvania</strong>, Class of 2030. i like work that gets checked against real constraints,
-    whether that's an FSAE rulebook, a flight environment, or a validation dataset.
-  </p>
+    <button class="cred-tag" data-tag="nasa" type="button" aria-expanded="false">
+      <span class="tag-face-wrap"><span class="tag-face">
+        <span class="tag-stamp">VISITOR</span>
+        <span class="tag-title">NASA SEES</span>
+        <span class="tag-sub">tear to read</span>
+      </span></span>
+      <span class="tag-detail-wrap"><span class="tag-detail">
+        NASA SEES Research Intern, UT Austin, 5% acceptance rate. Proposed a bioinspired PDMS
+        film for passive CubeSat thermal control.
+      </span></span>
+    </button>
 
-  <p>while in high school at <strong>TJHSST</strong>, i:</p>
+    <button class="cred-tag" data-tag="isef" type="button" aria-expanded="false">
+      <span class="tag-face-wrap"><span class="tag-face">
+        <span class="tag-stamp">EXHIBITOR</span>
+        <span class="tag-title">ISEF</span>
+        <span class="tag-sub">tear to read</span>
+      </span></span>
+      <span class="tag-detail-wrap"><span class="tag-detail">
+        4th place, Physics &amp; Astronomy, International Science and Engineering Fair. One of
+        12 awards for a machine learning framework for space debris surveillance, published on
+        SSRN.
+      </span></span>
+    </button>
 
-  <ul>
-    <li>interned with <strong>NASA SEES</strong> at UT Austin (5% acceptance), proposing a bioinspired PDMS film for passive CubeSat thermal control</li>
-    <li>researched CubeSat digipeater software at <strong>George Washington University</strong></li>
-    <li>published two papers on SSRN, including a machine learning framework for space debris surveillance that won <strong>12 awards</strong> and placed 4th at <strong>ISEF</strong></li>
-    <li>co-founded <strong>DMV Debate</strong>, scaling a peer-taught program to 600+ students across 5 states</li>
-    <li>led <strong>TJ Space Program</strong> as Co-President, directing CAD work on a high-altitude balloon payload</li>
-    <li>graduated with a <strong>3.96 GPA</strong> and was named a National Merit Commended Scholar</li>
-  </ul>
+    <button class="cred-tag" data-tag="per" type="button" aria-expanded="false">
+      <span class="tag-face-wrap"><span class="tag-face">
+        <span class="tag-stamp">PASSED</span>
+        <span class="tag-title">TECH INSPECTION</span>
+        <span class="tag-sub">tear to read</span>
+      </span></span>
+      <span class="tag-detail-wrap"><span class="tag-detail">
+        Penn Electric Racing, Mechanical. Worked a full FSAE brake pedal design from the
+        rulebook: pedal ratio 6.0, 0.578&Prime; master cylinder bore, validated against a
+        1500&nbsp;N structural load case.
+      </span></span>
+    </button>
 
-  <p>
-    this fall i started at Penn, where i'm on the mechanical side of <strong>Penn Electric
-    Racing</strong>, working through brake system design calculations against the FSAE rulebook.
-  </p>
+  </div>
 
-  <p>
-    i'm looking for a mechanical engineering internship where i can keep working on hardware
-    that actually gets tested.
-  </p>
+  <h1 class="name" id="nameHeading">Nikhil Krishna</h1>
+
+  <button class="flip-board" id="flipBoard" type="button" aria-label="cycle through roles">
+    <span class="flip-cells" id="flipCells"></span>
+  </button>
+
+  <div class="copy">
+    <p class="personal-line">i like building things that have to work.</p>
+
+    <p>
+      i'm studying <strong>Mechanical Engineering &amp; Applied Mechanics at the University of
+      Pennsylvania</strong>, Class of 2030. i like work that gets checked against real constraints,
+      whether that's an FSAE rulebook, a flight environment, or a validation dataset.
+    </p>
+
+    <p>while in high school at <strong>TJHSST</strong>, i:</p>
+
+    <ul>
+      <li>interned with <strong>NASA SEES</strong> at UT Austin (5% acceptance), proposing a bioinspired PDMS film for passive CubeSat thermal control</li>
+      <li>researched CubeSat digipeater software at <strong>George Washington University</strong></li>
+      <li>published two papers on SSRN, including a machine learning framework for space debris surveillance that won <strong>12 awards</strong> and placed 4th at <strong>ISEF</strong></li>
+      <li>co-founded <strong>DMV Debate</strong>, scaling a peer-taught program to 600+ students across 5 states</li>
+      <li>led <strong>TJ Space Program</strong> as Co-President, directing CAD work on a high-altitude balloon payload</li>
+      <li>graduated with a <strong>3.96 GPA</strong> and was named a National Merit Commended Scholar</li>
+    </ul>
+
+    <p>
+      this fall i started at Penn, where i'm on the mechanical side of <strong>Penn Electric
+      Racing</strong>, working through brake system design calculations against the FSAE rulebook.
+    </p>
+
+    <p>
+      i'm looking for a mechanical engineering internship where i can keep working on hardware
+      that actually gets tested.
+    </p>
+  </div>
 
   <hr>
 
