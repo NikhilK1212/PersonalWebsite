@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Engineering portfolio of Nikhil Krishna. Five projects in vehicle dynamics, aerodynamics, thermal control and applied machine learning.">
+<meta property="og:title" content="Nikhil Krishna, Engineering Portfolio">
+<meta property="og:description" content="Five projects in vehicle dynamics, aerodynamics, thermal control and applied machine learning.">
+<meta property="og:type" content="website">
+<title>Nikhil Krishna Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+:root{ --bg:#000; --fg:#fff; --mut:#ababab; color-scheme:dark; }
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--bg); color:var(--fg);
+  font-family:"Libre Baskerville",Georgia,"Times New Roman",serif;
+  font-size:16px; line-height:1.75;
+}
+img{max-width:100%; height:auto; display:block}
+a{color:var(--fg); text-decoration:underline; text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--fg); outline-offset:3px}
+.wrap{max-width:740px; margin:0 auto; padding-inline:24px}
+
+nav{padding-block:20px}
+nav a{
+  display:inline-block; margin-right:20px; font-size:14px;
+  color:var(--mut); text-decoration:none;
+}
+nav a:hover{color:var(--fg)}
+
+header{padding-block:56px 40px}
+h1{font-size:40px; line-height:1.2; font-weight:700; margin:0 0 12px; letter-spacing:-.01em}
+header .sub{font-size:18px; font-style:italic; color:var(--fg); margin:0 0 22px}
+header .meta{font-size:14.5px; color:var(--mut); margin:0}
+
+.toc{padding-block:8px 48px}
+.toc h2{font-size:18px; font-weight:700; margin:0 0 16px}
+.toc ol{margin:0; padding-left:22px}
+.toc li{margin-bottom:10px; font-size:15.5px}
+.toc a{text-decoration:none}
+.toc a:hover{text-decoration:underline}
+
+section.proj{padding-block:52px}
+h2.pt{font-size:25px; line-height:1.35; font-weight:700; margin:0 0 12px}
+p.role{font-size:14.5px; font-style:italic; color:var(--mut); margin:0 0 32px}
+h3{font-size:19px; font-weight:700; margin:42px 0 14px}
+ul{margin:0 0 4px; padding-left:22px}
+li{margin-bottom:9px; padding-left:2px}
+
+figure{margin:26px 0}
+figcaption{font-size:13.5px; font-style:italic; color:var(--mut); margin-top:10px; line-height:1.55}
+figure.eq{margin:20px 0}
+.eqbox{background:#fff; padding:18px 20px; display:flex; justify-content:center}
+.eqbox img{width:auto}
+
+footer{padding-block:56px 80px}
+footer h2{font-size:25px; font-weight:700; margin:0 0 16px}
+footer p{margin:0 0 8px}
+footer .fine{font-size:13.5px; font-style:italic; color:var(--mut); margin-top:26px}
+
+@media (max-width:640px){
+  h1{font-size:30px} h2.pt{font-size:21px} body{font-size:15.5px}
+}
+html{scroll-behavior:smooth; scroll-padding-top:16px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<nav class="wrap">
+<a href="#p1">Space Debris</a><a href="#p2">CubeSat Cooling</a><a href="#p3">Brake Design</a><a href="#p4">RIPPLE</a><a href="#p5">Go-Kart Aero</a><a href="#contact">Contact</a>
+</nav>
+
+<header class="wrap">
+<h1>Nikhil Krishna</h1>
+<p class="sub">Engineering Portfolio</p>
+<p class="meta">University of Pennsylvania, School of Engineering and Applied Science</p>
+</header>
+
+<div class="toc wrap">
+<h2>Contents</h2>
+<ol>
+<li><a href="#p1">A Comprehensive Machine Learning Paradigm for Space Debris Surveillance</a></li>
+<li><a href="#p2">Thermal Control of CubeSats using Micro-structured Films</a></li>
+<li><a href="#p3">Penn Electric Racing Mechanical Challenge: Brake Pedal Design</a></li>
+<li><a href="#p4">RIPPLE: AI-Powered Vertical Supply Chain Management for Medicine</a></li>
+<li><a href="#p5">G.E.A.R.: Go-Kart Efficiency through Aerodynamic Research</a></li>
+</ol>
+</div>
+
+<section class="proj wrap" id="p1">
+<h2 class="pt">01. A Comprehensive Machine Learning Paradigm for Space Debris Surveillance</h2>
+<p class="role">Research project with one partner, Nived Nandakumar. Published on SSRN. <a href="https://ssrn.com/abstract=5367113">Read the paper</a></p>
+<h3>The problem</h3>
+<ul>
+<li>Millions of fragments from old rockets and dead satellites now orbit Earth</li>
+<li>Kessler syndrome is the runaway case, where each collision creates debris that causes the next</li>
+<li>Ground telescopes only track the larger pieces and the atmosphere distorts what they see</li>
+<li>No system has actually removed debris, only proposals and planned missions</li>
+</ul>
+<figure>
+<img src="img/deb_growth.webp" alt="Tracked objects in orbit over a 64 year period. Source: European Space Agency, 2024." width="1166" height="568">
+<figcaption>Fig. 1. Tracked objects in orbit over a 64 year period. Source: European Space Agency, 2024.</figcaption>
+</figure>
+<h3>Model one, detection</h3>
+<ul>
+<li>Convolutional neural network trained on over 5,000 labelled orbital images</li>
+<li>Multi task loss combining classification, localisation and confidence</li>
+<li>Anchor boxes refined against ground truth by minimising intersection over union</li>
+<li>Random scaling, rotation and flipping to make it generalise</li>
+</ul>
+<figure>
+<img src="img/deb_detect.webp" alt="Detection output on a held out test image." width="482" height="471">
+<figcaption>Fig. 2. Detection output on a held out test image.</figcaption>
+</figure>
+<figure class="eq">
+<div class="eqbox"><img src="img/deb_m_bbox.webp" alt="Localisation loss, penalising a box in the wrong place or of the wrong size." width="841" height="503"></div>
+<figcaption>Eq. 1. Localisation loss, penalising a box in the wrong place or of the wrong size.</figcaption>
+</figure>
+<h3>Model two, trajectory</h3>
+<ul>
+<li>Physics informed neural network with an LSTM layer reading trajectory history</li>
+<li>Kepler's third law, eccentricity limits, drag and gravity all enforced as loss terms</li>
+<li>A plain network drifts into orbits that cannot physically exist, the constraints stop that</li>
+<li>Time derivatives modelled with gradient tape so predictions stay smooth</li>
+</ul>
+<figure class="eq">
+<div class="eqbox"><img src="img/deb_m_pinn.webp" alt="Total loss, combining prediction error with four weighted physics penalties." width="600" height="203"></div>
+<figcaption>Eq. 2. Total loss, combining prediction error with four weighted physics penalties.</figcaption>
+</figure>
+<figure class="eq">
+<div class="eqbox"><img src="img/deb_m_kepler.webp" alt="Kepler's third law written as a residual. Zero when period and semi-major axis agree." width="567" height="379"></div>
+<figcaption>Eq. 3. Kepler's third law written as a residual. Zero when period and semi-major axis agree.</figcaption>
+</figure>
+<figure>
+<img src="img/deb_orbit3d.webp" alt="A predicted orbit for a piece of Ariane 42P rocket debris." width="598" height="609">
+<figcaption>Fig. 3. A predicted orbit for a piece of Ariane 42P rocket debris.</figcaption>
+</figure>
+<h3>Model three, collision risk</h3>
+<ul>
+<li>Random forest regressor, 100 decision trees on bootstrapped samples</li>
+<li>Works from relative speed, distance and approach angle</li>
+<li>Risk predicted on a log base 2 scale for resolution at low probabilities</li>
+<li>Averaging decorrelated trees cuts variance, which the formula makes explicit</li>
+</ul>
+<figure>
+<img src="img/deb_rfr_arch.webp" alt="Random forest structure. Samples fan out to one hundred trees and the predictions are averaged." width="852" height="280">
+<figcaption>Fig. 4. Random forest structure. Samples fan out to one hundred trees and the predictions are averaged.</figcaption>
+</figure>
+<figure class="eq">
+<div class="eqbox"><img src="img/deb_m_var.webp" alt="Why averaging works, and why decorrelating the trees matters." width="615" height="342"></div>
+<figcaption>Eq. 4. Why averaging works, and why decorrelating the trees matters.</figcaption>
+</figure>
+<h3>The laser application</h3>
+<ul>
+<li>The three models feed a proposed satellite carrying a pulsed laser</li>
+<li>Focused heat vaporises a thin surface layer, which is ablation</li>
+<li>The plasma plume pushes the fragment onto a lower orbit until it burns up</li>
+<li>More precise than any ground based attempt because the platform is already alongside</li>
+</ul>
+<figure>
+<img src="img/deb_ablation.webp" alt="Ablation geometry. The vaporised layer produces thrust that perturbs the orbit downward." width="862" height="345">
+<figcaption>Fig. 5. Ablation geometry. The vaporised layer produces thrust that perturbs the orbit downward.</figcaption>
+</figure>
+<h3>Results</h3>
+<ul>
+<li>Detection reached 95.4 percent mean average precision, 98.0 percent on recall confidence</li>
+<li>Trajectory model reached R squared 0.979 with mean squared error 0.015</li>
+<li>Collision risk model reached R squared 0.981 with mean squared error 0.014</li>
+<li>All three run behind one interface, upload an image and get object, orbit and risk together</li>
+</ul>
+<figure>
+<img src="img/deb_prcurve.webp" alt="Precision against recall for every class." width="1042" height="689">
+<figcaption>Fig. 6. Precision against recall for every class.</figcaption>
+</figure>
+<figure>
+<img src="img/deb_ui.webp" alt="The interface running detection, orbit prediction and collision scoring on one uploaded image." width="1500" height="1588">
+<figcaption>Fig. 7. The interface running detection, orbit prediction and collision scoring on one uploaded image.</figcaption>
+</figure>
+</section>
+<section class="proj wrap" id="p2">
+<h2 class="pt">02. Thermal Control of CubeSats using Micro-structured Films</h2>
+<p class="role">Research conducted through the NASA STEM Enhancement in Earth Science Internship, mentored by Bridget Kimsey. Paper published on SSRN. <a href="https://ssrn.com/abstract=7271839">Read the paper</a></p>
+<h3>The problem</h3>
+<ul>
+<li>CubeSats are shoebox sized with almost no mass budget for cooling hardware</li>
+<li>AI chips on board run hot and absorbed sunlight adds to the load</li>
+<li>Radiation flips bits in memory and corrupts what the chip computes</li>
+<li>Radiation hardened parts exist but lag commercial chips badly on performance</li>
+</ul>
+<figure>
+<img src="img/see_bitflip.webp" alt="Radiation striking a memory chip flips a stored bit and corrupts the result. Source: Cui, M., 2022." width="677" height="548">
+<figcaption>Fig. 8. Radiation striking a memory chip flips a stored bit and corrupts the result. Source: Cui, M., 2022.</figcaption>
+</figure>
+<h3>The mechanism</h3>
+<ul>
+<li>The Saharan silver ant survives midday desert heat with no active cooling</li>
+<li>Its hairs have a triangular cross section that drives total internal reflection</li>
+<li>The same geometry raises emission in the mid infrared</li>
+<li>Reflecting and radiating at once is exactly what a satellite face needs</li>
+</ul>
+<figure>
+<img src="img/see_ant.webp" alt="The Saharan silver ant. Its silver appearance is the reflection itself." width="1500" height="999">
+<figcaption>Fig. 9. The Saharan silver ant. Its silver appearance is the reflection itself.</figcaption>
+</figure>
+<figure>
+<img src="img/see_sem.webp" alt="Electron microscope images of the ant's hairs and their triangular cross section. Source: Shi, N. N. et al., 2015, Science." width="1242" height="1244">
+<figcaption>Fig. 10. Electron microscope images of the ant's hairs and their triangular cross section. Source: Shi, N. N. et al., 2015, Science.</figcaption>
+</figure>
+<h3>The proposed film</h3>
+<ul>
+<li>Replicate that triangular microstructure in a thin silicone film</li>
+<li>Mount on the minus Z face and couple it to the internal electronics</li>
+<li>Passive throughout, no power draw and almost no added mass</li>
+</ul>
+<figure>
+<img src="img/see_film.webp" alt="How a radiative cooling film reflects sunlight and emits heat. Source: Jung, J. et al., 2023, Micromachines." width="550" height="202">
+<figcaption>Fig. 11. How a radiative cooling film reflects sunlight and emits heat. Source: Jung, J. et al., 2023, Micromachines.</figcaption>
+</figure>
+<h3>Results</h3>
+<ul>
+<li>Research conducted through the NASA STEM Enhancement in Earth Science Internship</li>
+<li>Paper published on SSRN and available to read</li>
+<li>Literature supports solar reflectance above 95 percent for this structure class</li>
+<li>Passive throughout, so it draws no power and adds almost no mass to the satellite</li>
+</ul>
+</section>
+<section class="proj wrap" id="p3">
+<h2 class="pt">03. Penn Electric Racing Mechanical Challenge: Brake Pedal Design</h2>
+<p class="role">Solo design project, completed in one week as the mechanical application challenge for Penn Electric Racing.</p>
+<h3>The problem</h3>
+<ul>
+<li>Formula SAE is a student contest to design and build a race car</li>
+<li>This was the Penn mechanical application challenge, which I did alone</li>
+<li>The rules demand two independent hydraulic circuits and no brake by wire</li>
+<li>Target pressures of 1200 psi front and 400 psi rear had to be validated, not assumed</li>
+</ul>
+<figure>
+<img src="img/per_forcepath.webp" alt="Complete force path, from the driver's foot to the pressure at each axle." width="673" height="1110">
+<figcaption>Fig. 12. Complete force path, from the driver's foot to the pressure at each axle.</figcaption>
+</figure>
+<h3>From deceleration to hydraulic pressure</h3>
+<ul>
+<li>Weight transfer under 1.5 g braking moves 740.5 N onto the front axle</li>
+<li>Front axle load rises to 1964.8 N while the rear drops to 585.8 N</li>
+<li>Tyre friction sets the torque each axle must absorb, 748.6 and 223.2 newton metres</li>
+<li>Working back through the caliper gives 613 psi front and 183 psi rear required</li>
+</ul>
+<figure>
+<img src="img/per_fbd.webp" alt="Free body diagram of the car under braking." width="1500" height="1068">
+<figcaption>Fig. 13. Free body diagram of the car under braking.</figcaption>
+</figure>
+<figure class="eq">
+<div class="eqbox"><img src="img/per_eq03c.png" alt="Load transferred to the front axle under braking, 740.5 N." width="847" height="275"></div>
+<figcaption>Eq. 5. Load transferred to the front axle under braking, 740.5 N.</figcaption>
+</figure>
+<figure class="eq">
+<div class="eqbox"><img src="img/per_eq07c.png" alt="Required line pressure. The factor of two is because a caliper clamps from both sides." width="946" height="270"></div>
+<figcaption>Eq. 6. Required line pressure. The factor of two is because a caliper clamps from both sides.</figcaption>
+</figure>
+<h3>Pedal and hydraulics</h3>
+<ul>
+<li>Moment balance about the pivot gives a pedal ratio of 6 to 1</li>
+<li>A 1.0 inch pushrod arm therefore sets a 6.0 inch pedal arm, inside the envelope</li>
+<li>70 lbf of foot force becomes 420 lbf at the pushrod</li>
+<li>One bore serves both circuits at 0.578 inch calculated, rounded to a 9/16 inch Tilton unit</li>
+<li>Balance bar pivot at one quarter length splits that 420 lbf into 315 and 105 lbf</li>
+</ul>
+<figure>
+<img src="img/per_pedal.webp" alt="Moment balance on the pedal arm about its floor pivot." width="1412" height="1278">
+<figcaption>Fig. 14. Moment balance on the pedal arm about its floor pivot.</figcaption>
+</figure>
+<figure class="eq">
+<div class="eqbox"><img src="img/per_eq10c.png" alt="The pedal ratio is both a force ratio and a length ratio." width="1030" height="283"></div>
+<figcaption>Eq. 7. The pedal ratio is both a force ratio and a length ratio.</figcaption>
+</figure>
+<figure class="eq">
+<div class="eqbox"><img src="img/per_eq08c.png" alt="Bore sizing from the target pressure." width="1268" height="314"></div>
+<figcaption>Eq. 8. Bore sizing from the target pressure.</figcaption>
+</figure>
+<figure>
+<img src="img/per_balancebar.webp" alt="The balance bar. Both master cylinders share one bore size." width="1500" height="769">
+<figcaption>Fig. 15. The balance bar. Both master cylinders share one bore size.</figcaption>
+</figure>
+<figure class="eq">
+<div class="eqbox"><img src="img/per_s6c.png" alt="Balance bar reactions. A three to one split puts the pivot one quarter along the bar." width="1339" height="340"></div>
+<figcaption>Eq. 9. Balance bar reactions. A three to one split puts the pivot one quarter along the bar.</figcaption>
+</figure>
+<h3>Structural sizing</h3>
+<ul>
+<li>Structural case uses the rulebook 1500 N foot load, giving 2023 lbf at the pushrod</li>
+<li>Bending stress with a safety factor of 2.5 sizes the aluminium arm to 0.625 inch</li>
+<li>Steel would need only 0.448 inch but weighs more for the stiffness gained, so aluminium wins</li>
+<li>Euler buckling on the pushrod returns a safety factor of 48.2</li>
+<li>Pin shear and bolt bearing return 3.24 and 54.1</li>
+</ul>
+<figure class="eq">
+<div class="eqbox"><img src="img/per_s2c.png" alt="Bending stress in a solid rectangular section." width="1150" height="356"></div>
+<figcaption>Eq. 10. Bending stress in a solid rectangular section.</figcaption>
+</figure>
+<figure class="eq">
+<div class="eqbox"><img src="img/per_s5c.png" alt="Euler critical buckling load for the pushrod." width="1175" height="396"></div>
+<figcaption>Eq. 11. Euler critical buckling load for the pushrod.</figcaption>
+</figure>
+<h3>Results</h3>
+<ul>
+<li>Full assembly specified with a bill of materials split into off the shelf and manufactured</li>
+<li>Pedal sweeps 14.9 degrees over 1.6 inches of travel</li>
+<li>Every structural member clears its safety factor with margin</li>
+<li>Two independent circuits mean a failure on one axle still leaves braking on the other</li>
+</ul>
+</section>
+<section class="proj wrap" id="p4">
+<h2 class="pt">04. RIPPLE: AI-Powered Vertical Supply Chain Management for Medicine</h2>
+<p class="role">Built over one weekend at DNHacks 2026 with four teammates. <a href="https://portal.dnhacks.org/e/2026/showcase/ripple">Showcase</a> and <a href="https://github.com/2900xt/ripple-dnhacks">source</a></p>
+<h3>The problem</h3>
+<ul>
+<li>Built over one weekend at DNHacks with four teammates</li>
+<li>Most medicines depend on ingredients from a handful of overseas factories</li>
+<li>Six antibiotics that look diversified trace back to one shared precursor</li>
+<li>If that factory stops, all six run short at once</li>
+</ul>
+<figure>
+<img src="img/rip_precursor.webp" alt="Six antibiotics traced back to one shared precursor. None are on a shortage list." width="1500" height="843">
+<figcaption>Fig. 16. Six antibiotics traced back to one shared precursor. None are on a shortage list.</figcaption>
+</figure>
+<h3>The graph and the risk model</h3>
+<ul>
+<li>Public FDA registers pulled into one graph of 1,732 nodes and 3,425 edges</li>
+<li>Failure spreads through the graph by breadth first search with a redundancy rollup</li>
+<li>An L2 regularised logistic model scores which plant fails next, from nine leakage free features</li>
+<li>Raw scores recalibrated so a displayed percentage matches observed frequency</li>
+</ul>
+<figure>
+<img src="img/rip_console.webp" alt="The console tracing a drug through its suppliers and showing where they sit in the world." width="1280" height="800">
+<figcaption>Fig. 17. The console tracing a drug through its suppliers and showing where they sit in the world.</figcaption>
+</figure>
+<figure class="eq">
+<div class="eqbox"><img src="img/rip_1.png" alt="The model maps a weighted sum of features to a probability." width="593" height="170"></div>
+<figcaption>Eq. 12. The model maps a weighted sum of features to a probability.</figcaption>
+</figure>
+<figure class="eq">
+<div class="eqbox"><img src="img/rip_2.png" alt="The Wilson interval, used to check the displayed percentage against observed frequency." width="788" height="325"></div>
+<figcaption>Eq. 13. The Wilson interval, used to check the displayed percentage against observed frequency.</figcaption>
+</figure>
+<h3>Rerouting and the sensor</h3>
+<ul>
+<li>Switch off any factory and watch the disruption propagate</li>
+<li>Replacement suppliers ranked on capability, geography and their own risk</li>
+<li>Each checked against Trade Agreements Act and Defence Department restrictions</li>
+<li>An ESP32 sensor streams cold chain telemetry and computes mean kinetic temperature</li>
+</ul>
+<figure>
+<img src="img/rip_fail.webp" alt="A simulated factory shutdown, with the affected branch marked." width="1280" height="800">
+<figcaption>Fig. 18. A simulated factory shutdown, with the affected branch marked.</figcaption>
+</figure>
+<figure>
+<img src="img/rip_route.webp" alt="Ranked replacement suppliers, each scored and checked for procurement eligibility." width="1280" height="800">
+<figcaption>Fig. 19. Ranked replacement suppliers, each scored and checked for procurement eligibility.</figcaption>
+</figure>
+<figure class="eq">
+<div class="eqbox"><img src="img/rip_3.png" alt="Mean kinetic temperature, weighted by the time each reading represents." width="1085" height="254"></div>
+<figcaption>Eq. 14. Mean kinetic temperature, weighted by the time each reading represents.</figcaption>
+</figure>
+<h3>Results</h3>
+<ul>
+<li>Model reached 0.814 AUC against a 0.70 baseline, beating it on all three time cutoffs</li>
+<li>Gradient boosting was tested and lost at 0.641, so the transparent model is also the accurate one</li>
+<li>Supplier name matching scored 100 percent on a labelled benchmark</li>
+<li>Covers 1,706 of 1,732 nodes, and the 26 it cannot resolve are left blank deliberately</li>
+</ul>
+</section>
+<section class="proj wrap" id="p5">
+<h2 class="pt">05. G.E.A.R.: Go-Kart Efficiency through Aerodynamic Research</h2>
+<p class="role">Senior research project with two classmates, presented at tjSTAR.</p>
+<h3>The problem</h3>
+<ul>
+<li>Senior research project with two classmates, presented at tjSTAR</li>
+<li>Open wheel karts churn the air around exposed tyres and lose speed to it</li>
+<li>The front panel is the first surface the airflow meets</li>
+<li>We asked whether shaping it could cut drag without losing the downforce that holds grip</li>
+</ul>
+<figure>
+<img src="img/gea_cad.webp" alt="The kart rebuilt in CAD, used as the baseline every panel was tested against." width="1432" height="1036">
+<figcaption>Fig. 20. The kart rebuilt in CAD, used as the baseline every panel was tested against.</figcaption>
+</figure>
+<h3>What governs the problem</h3>
+<ul>
+<li>Drag rises with the square of velocity, so losses grow fast at speed</li>
+<li>Downforce follows the same square law, which is why the two trade against each other</li>
+<li>Reynolds number sets how turbulent the flow around the kart becomes</li>
+<li>Goal was a panel that performs inside a high Reynolds number regime</li>
+</ul>
+<figure class="eq">
+<div class="eqbox"><img src="img/gear_1.png" alt="Drag force." width="454" height="151"></div>
+<figcaption>Eq. 15. Drag force.</figcaption>
+</figure>
+<figure class="eq">
+<div class="eqbox"><img src="img/gear_3.png" alt="Reynolds number, which decides whether the flow is smooth or turbulent." width="310" height="163"></div>
+<figcaption>Eq. 16. Reynolds number, which decides whether the flow is smooth or turbulent.</figcaption>
+</figure>
+<figure>
+<img src="img/gea_balance.webp" alt="Drag, downforce and the balance point between them." width="1245" height="405">
+<figcaption>Fig. 21. Drag, downforce and the balance point between them.</figcaption>
+</figure>
+<h3>How we tested</h3>
+<ul>
+<li>Several panel shapes designed in CAD, curved, flat and sloped</li>
+<li>Cowl and cowl less variants to isolate how much drag the driver adds</li>
+<li>Each 3D printed and run in a wind tunnel against the bare chassis</li>
+<li>Drag and front and rear downforce measured across a swept speed range</li>
+</ul>
+<figure>
+<img src="img/gea_panel.webp" alt="One of the 3D printed front panels made for wind tunnel testing." width="1418" height="1148">
+<figcaption>Fig. 22. One of the 3D printed front panels made for wind tunnel testing.</figcaption>
+</figure>
+<figure>
+<img src="img/gea_karttunnel.webp" alt="The kart model mounted in the wind tunnel." width="1500" height="1125">
+<figcaption>Fig. 23. The kart model mounted in the wind tunnel.</figcaption>
+</figure>
+<h3>Results</h3>
+<ul>
+<li>The open panel beat the covered panel at every wind speed tested</li>
+<li>The driver cover added more drag than the downforce it recovered was worth</li>
+<li>The gap widened with speed, matching the square law</li>
+<li>CFD agreed with the tunnel, and wide frontal area is the limit to fix next</li>
+</ul>
+<figure>
+<img src="img/gea_chart_panel.webp" alt="Measured drag against wind speed for the covered panel and the open panel." width="1200" height="742">
+<figcaption>Fig. 24. Measured drag against wind speed for the covered panel and the open panel.</figcaption>
+</figure>
+</section>
+
+<footer class="wrap" id="contact">
+<h2>Contact</h2>
+<p><a href="mailto:nikhilkr@engineering.upenn.edu">nikhilkr@engineering.upenn.edu</a></p>
+<p><a href="https://www.linkedin.com/in/nikhil-rao-krishna/">linkedin.com/in/nikhil-rao-krishna</a></p>
+<p class="fine">Figures are my own or my teams' work except where a source is named in the caption.
+Equations in projects 01 and 03 are reproduced from the original papers.</p>
+</footer>
+</body>
+</html>
