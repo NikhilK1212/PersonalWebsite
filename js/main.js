@@ -22,18 +22,18 @@
     }, { margin: '0px 0px -12% 0px' });
   }
 
-  document.querySelectorAll('.copy, .fact-block').forEach(function (el) {
+  document.querySelectorAll('.proj-card, .proj-head, .plate, .eq, .sec-media .sketch, .pager, .page-title, .page-lede').forEach(function (el) {
     reveal(el);
   });
 
-  var bulletList = document.querySelector('.copy ul');
-  if (bulletList) {
-    var items = bulletList.querySelectorAll('li');
+  // Bullet lists slide in one item at a time.
+  document.querySelectorAll('.sec-text ul, ul.cells').forEach(function (list) {
+    var items = list.querySelectorAll('li');
     items.forEach(function (li) {
       li.style.opacity = '0';
       li.style.transform = 'translateX(-10px)';
     });
-    var stopList = M.inView(bulletList, function () {
+    var stopList = M.inView(list, function () {
       M.animate(
         items,
         { opacity: [0, 1], transform: ['translateX(-10px)', 'translateX(0px)'] },
@@ -41,5 +41,5 @@
       );
       if (stopList) stopList();
     }, { margin: '0px 0px -12% 0px' });
-  }
+  });
 })();

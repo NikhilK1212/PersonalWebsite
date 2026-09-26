@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brake Pedal | Nikhil Krishna</title>
+<meta name="description" content="Penn Electric Racing Mechanical Challenge: Brake Pedal Design. A project from Nikhil Krishna&#x27;s design portfolio.">
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<div class="frame" aria-hidden="true">
+  <i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i>
+</div>
+<div class="corner-fold" aria-hidden="true"></div>
+
+<main class="page">
+  <div class="side-deco left" aria-hidden="true">
+    <div class="doodle" style="top:120px"><svg class="doodle-svg" id="doodleL1" viewBox="0 0 60 60"></svg></div>
+    <div class="doodle" style="top:900px"><svg class="doodle-svg" id="doodleL2" viewBox="0 0 60 60"></svg></div>
+    <div class="doodle" style="top:1700px"><svg class="doodle-svg" id="doodleL3" viewBox="0 0 60 60"></svg></div>
+  </div>
+  <div class="side-deco right" aria-hidden="true">
+    <div class="doodle" style="top:480px"><svg class="doodle-svg" id="doodleR1" viewBox="0 0 60 60"></svg></div>
+    <div class="doodle" style="top:1300px"><svg class="doodle-svg" id="doodleR2" viewBox="0 0 60 60"></svg></div>
+    <div class="doodle" style="top:2100px"><svg class="doodle-svg" id="doodleR3" viewBox="0 0 60 60"></svg></div>
+  </div>
+  <header class="topbar">
+    <a class="brand" href="../index.html">Nikhil Krishna</a>
+    <nav aria-label="Site">
+      <a href="../index.html">Home</a>
+      <a href="../portfolio.html" aria-current="page">Design Portfolio</a>
+      <a href="../assets/Nikhil_Krishna_Resume.pdf" target="_blank" rel="noopener">Resume</a>
+      <a href="https://www.linkedin.com/in/nikhil-rao-krishna" target="_blank" rel="noopener">LinkedIn</a>
+    </nav>
+  </header>
+
+  <div class="proj-head">
+    <div>
+      <p class="proj-tag"><a href="../portfolio.html">&larr; all projects</a></p>
+      <h1 class="proj-title">Penn Electric Racing Mechanical Challenge: Brake Pedal Design</h1>
+      <p class="proj-summary">a full Formula SAE braking system derived from first principles, in one week</p>
+    </div>
+    <dl class="spec">
+      <div><dt>project</dt><dd>03 of 05</dd></div>
+      <div><dt>event</dt><dd>Penn Electric Racing</dd></div>
+      <div><dt>credit</dt><dd>Solo design project, completed in one week as the mechanical application challenge for Penn Electric Racing.</dd></div>
+    </dl>
+  </div>
+
+  <section class="proj-sec" aria-labelledby="s01">
+    <div class="sec-text">
+      <h2 id="s01"><span class="sec-num">01</span>the problem</h2>
+      <ul>
+        <li>Formula SAE is a student contest to design and build a race car</li>
+        <li>this was the Penn mechanical application challenge, which i did alone</li>
+        <li>the rules demand two independent hydraulic circuits and no brake by wire</li>
+        <li>target pressures of 1200 psi front and 400 psi rear had to be validated, not assumed</li>
+      </ul>
+    </div>
+    <div class="sec-media">
+      <figure class="sketch "><svg data-sketch="per-forcepath" viewBox="0 0 360 230" role="img" aria-label="the force path, from the driver&#x27;s foot to each axle"></svg><figcaption>the force path, from the driver&#x27;s foot to each axle</figcaption></figure>
+    </div>
+  </section>
+  <section class="proj-sec" aria-labelledby="s02">
+    <div class="sec-text">
+      <h2 id="s02"><span class="sec-num">02</span>from deceleration to hydraulic pressure</h2>
+      <ul>
+        <li>weight transfer under 1.5 g braking moves 740.5 N onto the front axle</li>
+        <li>front axle load rises to 1964.8 N while the rear drops to 585.8 N</li>
+        <li>tire friction sets the torque each axle must absorb, 748.6 and 223.2 newton meters</li>
+        <li>working back through the caliper gives 613 psi front and 183 psi rear required</li>
+      </ul>
+    </div>
+    <div class="sec-media">
+      <figure class="sketch "><svg data-sketch="per-fbd" viewBox="0 0 360 210" role="img" aria-label="free body diagram of the car under braking"></svg><figcaption>free body diagram of the car under braking</figcaption></figure>
+      <figure class="eq"><div class="eq-panel"><img src="../assets/projects/eq_per_transfer.png" alt="Load transferred to the front axle under braking, 740.5 N." width="334" height="117" loading="lazy"></div><figcaption>Eq. 1. Load transferred to the front axle under braking, 740.5 N.</figcaption></figure>
+      <figure class="eq"><div class="eq-panel"><img src="../assets/projects/eq_per_pressure.png" alt="Required line pressure. The factor of two is because a caliper clamps from both sides." width="391" height="115" loading="lazy"></div><figcaption>Eq. 2. Required line pressure. The factor of two is because a caliper clamps from both sides.</figcaption></figure>
+    </div>
+  </section>
+  <section class="proj-sec" aria-labelledby="s03">
+    <div class="sec-text">
+      <h2 id="s03"><span class="sec-num">03</span>pedal and hydraulics</h2>
+      <ul>
+        <li>moment balance about the pivot gives a pedal ratio of 6 to 1</li>
+        <li>a 1.0 inch pushrod arm therefore sets a 6.0 inch pedal arm, inside the envelope</li>
+        <li>70 lbf of foot force becomes 420 lbf at the pushrod</li>
+        <li>one bore serves both circuits at 0.578 inch calculated, rounded to a 9/16 inch Tilton unit</li>
+        <li>balance bar pivot at one quarter length splits that 420 lbf into 315 and 105 lbf</li>
+      </ul>
+    </div>
+    <div class="sec-media">
+      <figure class="sketch "><svg data-sketch="per-pedal" viewBox="0 0 300 220" role="img" aria-label="moment balance on the pedal arm about its floor pivot"></svg><figcaption>moment balance on the pedal arm about its floor pivot</figcaption></figure>
+      <figure class="eq"><div class="eq-panel"><img src="../assets/projects/eq_per_ratio.png" alt="The pedal ratio is both a force ratio and a length ratio." width="425" height="116" loading="lazy"></div><figcaption>Eq. 3. The pedal ratio is both a force ratio and a length ratio.</figcaption></figure>
+      <figure class="eq"><div class="eq-panel"><img src="../assets/projects/eq_per_bore.png" alt="Bore sizing from the target pressure." width="524" height="130" loading="lazy"></div><figcaption>Eq. 4. Bore sizing from the target pressure.</figcaption></figure>
+      <figure class="sketch solo"><svg data-sketch="per-balancebar" viewBox="0 0 360 210" role="img" aria-label="the balance bar, pivoted a quarter of the way along"></svg><figcaption>the balance bar, pivoted a quarter of the way along</figcaption></figure>
+      <figure class="eq"><div class="eq-panel"><img src="../assets/projects/eq_per_balance.png" alt="Balance bar reactions. A three to one split puts the pivot one quarter along the bar." width="390" height="125" loading="lazy"></div><figcaption>Eq. 5. Balance bar reactions. A three to one split puts the pivot one quarter along the bar.</figcaption></figure>
+    </div>
+  </section>
+  <section class="proj-sec" aria-labelledby="s04">
+    <div class="sec-text">
+      <h2 id="s04"><span class="sec-num">04</span>structural sizing</h2>
+      <ul>
+        <li>structural case uses the rulebook 1500 N foot load, giving 2023 lbf at the pushrod</li>
+        <li>bending stress with a safety factor of 2.5 sizes the aluminum arm to 0.625 inch</li>
+        <li>steel would need only 0.448 inch but weighs more for the stiffness gained, so aluminum wins</li>
+        <li>Euler buckling on the pushrod returns a safety factor of 48.2</li>
+        <li>pin shear and bolt bearing return 3.24 and 54.1</li>
+      </ul>
+    </div>
+    <div class="sec-media">
+      <figure class="sketch "><svg data-sketch="per-structure" viewBox="0 0 340 210" role="img" aria-label="the two checks, arm bending and pushrod buckling"></svg><figcaption>the two checks, arm bending and pushrod buckling</figcaption></figure>
+      <figure class="eq"><div class="eq-panel"><img src="../assets/projects/eq_per_bending.png" alt="Bending stress in a solid rectangular section." width="475" height="133" loading="lazy"></div><figcaption>Eq. 6. Bending stress in a solid rectangular section.</figcaption></figure>
+      <figure class="eq"><div class="eq-panel"><img src="../assets/projects/eq_per_euler.png" alt="Euler critical buckling load for the pushrod." width="485" height="149" loading="lazy"></div><figcaption>Eq. 7. Euler critical buckling load for the pushrod.</figcaption></figure>
+    </div>
+  </section>
+  <section class="proj-sec cells-only" aria-labelledby="s05">
+    <h2 id="s05"><span class="sec-num">05</span>results</h2>
+      <ul class="cells">
+        <li>full assembly specified with a bill of materials split into off the shelf and manufactured</li>
+        <li>pedal sweeps 14.9 degrees over 1.6 inches of travel</li>
+        <li>every structural member clears its safety factor with margin</li>
+        <li>two independent circuits mean a failure on one axle still leaves braking on the other</li>
+      </ul>
+  </section>
+
+  <nav class="pager" aria-label="Other projects">
+    <a class="pager-prev" href="cubesat-thermal.html"><span>&larr; previous</span>CubeSat Thermal Film</a>
+    <a class="pager-next" href="ripple.html"><span>next &rarr;</span>RIPPLE</a>
+  </nav>
+
+  <footer class="foot">
+    <span class="who">Nikhil Krishna, University of Pennsylvania</span>
+    <span class="links">
+      <a href="mailto:nikhilkr@engineering.upenn.edu">nikhilkr@engineering.upenn.edu</a>
+      <a href="../assets/Nikhil_Krishna_Resume.pdf" target="_blank" rel="noopener">Resume</a>
+      <a href="https://www.linkedin.com/in/nikhil-rao-krishna" target="_blank" rel="noopener">LinkedIn</a>
+    </span>
+  </footer>
+</main>
+
+<script src="../js/vendor/rough.js"></script>
+<script src="../js/vendor/anime.min.js"></script>
+<script src="../js/vendor/motion.min.js"></script>
+<script src="../js/illustrations.js"></script>
+<script src="../js/sketches.js"></script>
+<script src="../js/main.js"></script>
+</body>
+</html>

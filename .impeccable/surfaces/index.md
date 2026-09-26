@@ -63,3 +63,24 @@ User feedback: the page still looked like "a fancy document/pdf," not a website;
 - Added `motion` (Motion/Framer Motion, `js/vendor/motion.min.js`, a minimal esbuild-bundled build exporting only `animate`/`inView`/`stagger` rather than vendoring the full ~800-file unbundled package) for scroll-triggered entrance reveals on the text blocks and a staggered reveal on the bullet list (`js/main.js`), replacing the now-dead tag-tear click handler. This is the fix for "it just looks like a fancy document": content now enters with motion as the page is scrolled, rather than all being present and static on load.
 - All added motion (rough draw-on, Motion text reveals, the existing blink/spin/tumble/orbit loops) is skipped under `prefers-reduced-motion: reduce`; reduced-motion visitors get the final static state directly with no missing content.
 - Investigated the user's other named link, `saurav-z/free-image-generation-api`: it is genuinely free (Cloudflare Workers AI free tier, no billing required) but requires the user to create their own Cloudflare account and manually deploy a Worker (paste code, set an API key, enable Workers AI, add an AI binding), account/infra setup only the user can do, so it was not integrated in this round; reported to the user instead of silently skipped.
+
+## Revision 5 (design portfolio folded into the site, one page per project)
+
+User asked for the design portfolio to live inside the site, with a button from the portfolio section into a separate page for each project (reference: davisryan.tech), and for more blueprint sketches redrawn from the real project figures.
+
+- Home page: new `#portfolio` section after the PER block. Five bordered plates, each with a rough.js thumbnail sketch, the event tag, full project title, a one-line summary and a rectangular "view project" button. Both contact rows now link to `#portfolio` instead of the old standalone portfolio folder, which was removed.
+- `projects/space-debris.html`, `cubesat-thermal.html`, `brake-pedal.html`, `ripple.html`, `gear.html`: each is problem, engineering sections and results, bullets only, with numbered "Fig. N." real figures on deep-blue plates and "Eq. N." white-ink equations (re-typeset at one size, PER equations show worked values). Prev/next pager and the standard contact row at the bottom.
+- `js/sketches.js`: 20 new rough.js drawings redrawn from the project figures (free body diagram, pedal lever, balance bar, detection box, ablation, dependency graph, wind tunnel and so on). They draw themselves on when scrolled into view (anime.js createDrawable, triggered by IntersectionObserver) and carry small loops (flow dashes, orbiting fragment, pulsing sensor, rocking pedal). Everything static under reduced motion. Sketches adapted from other people's figures say so in their caption.
+- The PER design PDF is still not linked anywhere.
+
+## Revision 6 (landing page, wider layouts)
+
+User asked for the home page to become a landing page only (name, school, majors, a portrait, buttons to resume, LinkedIn and the design portfolio) that looks classy and modern, and said the whole site read as built for a phone, with nothing using horizontal space.
+
+- `index.html` is now a single-screen two-column hero: eyebrow, handwritten name with a rough.js redline underline, one-line intro, a drafting title block (school, majors, class), rectangular buttons (Design Portfolio filled redline, Resume, LinkedIn outlined) and the email. Right column: the user's commencement photo, cropped to head and shoulders (`assets/portrait.webp`, 620x775, plus a 400w variant), in a plate with redline corner ticks, an offset hatched backing sheet and a sketched dimension line. Entrance motion in `js/home.js`, skipped under reduced motion. The fact blocks and bullet list were removed from the home page.
+- `portfolio.html` is new: top bar, handwritten title, and a 6-column card grid (two wide cards, then three) with sketch thumbnails.
+- Max content width raised from 760px to 1180px. Project pages now use a spec title block beside the title and a two-column section layout: sticky heading and bullets on the left, sketches, figures and equations on the right. Result sections without media become a row of result cells. All collapse to one column under 900px.
+
+## Revision 7
+
+Portrait swapped to a new photo the user supplied (rotated about 6.5 degrees so head and shirt line up, then cropped 4:5, `assets/portrait.webp` 592x740 plus 400w). Removed the intro sentences and the eyebrow line on the landing page because they repeated what the title block already says. Removed the commencement caption since the new photo is not from graduation.

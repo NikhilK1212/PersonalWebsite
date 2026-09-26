@@ -24,7 +24,7 @@ Most student portfolio sites in this genre are either (a) generic AI-generated S
 
 ## Operating Context
 
-Single page, no internal navigation/routing. Viewed by recruiters on desktop primarily, but must work on mobile. No CMS, no backend; content changes are code edits. Real downloadable assets already in the repo: `assets/Nikhil_Krishna_Resume.pdf`.
+Landing page (`index.html`), a design portfolio index (`portfolio.html`) and one static page per project (`projects/*.html`), with a shared top bar. No client-side routing. Viewed by recruiters on desktop primarily, but must work on mobile. No CMS, no backend; content changes are code edits. Real downloadable assets already in the repo: `assets/Nikhil_Krishna_Resume.pdf`.
 
 ## Capabilities and Constraints
 

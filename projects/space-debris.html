@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Space Debris | Nikhil Krishna</title>
+<meta name="description" content="A Comprehensive Machine Learning Paradigm for Space Debris Surveillance. A project from Nikhil Krishna&#x27;s design portfolio.">
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<div class="frame" aria-hidden="true">
+  <i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i>
+</div>
+<div class="corner-fold" aria-hidden="true"></div>
+
+<main class="page">
+  <div class="side-deco left" aria-hidden="true">
+    <div class="doodle" style="top:120px"><svg class="doodle-svg" id="doodleL1" viewBox="0 0 60 60"></svg></div>
+    <div class="doodle" style="top:900px"><svg class="doodle-svg" id="doodleL2" viewBox="0 0 60 60"></svg></div>
+    <div class="doodle" style="top:1700px"><svg class="doodle-svg" id="doodleL3" viewBox="0 0 60 60"></svg></div>
+  </div>
+  <div class="side-deco right" aria-hidden="true">
+    <div class="doodle" style="top:480px"><svg class="doodle-svg" id="doodleR1" viewBox="0 0 60 60"></svg></div>
+    <div class="doodle" style="top:1300px"><svg class="doodle-svg" id="doodleR2" viewBox="0 0 60 60"></svg></div>
+    <div class="doodle" style="top:2100px"><svg class="doodle-svg" id="doodleR3" viewBox="0 0 60 60"></svg></div>
+  </div>
+  <header class="topbar">
+    <a class="brand" href="../index.html">Nikhil Krishna</a>
+    <nav aria-label="Site">
+      <a href="../index.html">Home</a>
+      <a href="../portfolio.html" aria-current="page">Design Portfolio</a>
+      <a href="../assets/Nikhil_Krishna_Resume.pdf" target="_blank" rel="noopener">Resume</a>
+      <a href="https://www.linkedin.com/in/nikhil-rao-krishna" target="_blank" rel="noopener">LinkedIn</a>
+    </nav>
+  </header>
+
+  <div class="proj-head">
+    <div>
+      <p class="proj-tag"><a href="../portfolio.html">&larr; all projects</a></p>
+      <h1 class="proj-title">A Comprehensive Machine Learning Paradigm for Space Debris Surveillance</h1>
+      <p class="proj-summary">three machine learning models that find debris, predict its orbit and assess collision risk, and a space based laser design for debris removal</p>
+    </div>
+    <dl class="spec">
+      <div><dt>project</dt><dd>01 of 05</dd></div>
+      <div><dt>event</dt><dd>ISEF, 4th in Physics &amp; Astronomy</dd></div>
+      <div><dt>credit</dt><dd>Research project with one partner, Nived Nandakumar. published on SSRN.</dd></div>
+      <div><dt>links</dt><dd><a class="proof-link" href="https://ssrn.com/abstract=5367113" target="_blank" rel="noopener">Read the paper &rarr;</a></dd></div>
+    </dl>
+  </div>
+
+  <section class="proj-sec" aria-labelledby="s01">
+    <div class="sec-text">
+      <h2 id="s01"><span class="sec-num">01</span>the problem</h2>
+      <ul>
+        <li>millions of fragments from old rockets and dead satellites now orbit Earth</li>
+        <li>Kessler syndrome is the runaway case, where each collision creates debris that causes the next</li>
+        <li>ground telescopes only track the larger pieces and the atmosphere distorts what they see</li>
+        <li>no system has actually removed debris, only proposals and planned missions</li>
+      </ul>
+    </div>
+    <div class="sec-media">
+      <figure class="sketch "><svg data-sketch="debris-field" viewBox="0 0 340 200" role="img" aria-label="fragments sharing low Earth orbit with working satellites"></svg><figcaption>fragments sharing low Earth orbit with working satellites</figcaption></figure>
+      <figure class="plate "><img src="../assets/projects/deb_growth.webp" alt="Tracked objects in orbit over a 64 year period. Source: European Space Agency, 2024." width="1166" height="568" loading="lazy"><figcaption>Fig. 1. Tracked objects in orbit over a 64 year period. Source: European Space Agency, 2024.</figcaption></figure>
+    </div>
+  </section>
+  <section class="proj-sec" aria-labelledby="s02">
+    <div class="sec-text">
+      <h2 id="s02"><span class="sec-num">02</span>model one, detection</h2>
+      <ul>
+        <li>convolutional neural network trained on over 5,000 labeled orbital images</li>
+        <li>multi task loss combining classification, localization and confidence</li>
+        <li>anchor boxes refined against ground truth by minimizing intersection over union</li>
+        <li>random scaling, rotation and flipping to make it generalize</li>
+      </ul>
+    </div>
+    <div class="sec-media">
+      <figure class="sketch "><svg data-sketch="debris-detect" viewBox="0 0 320 200" role="img" aria-label="the network boxes and classifies each object it finds"></svg><figcaption>the network boxes and classifies each object it finds</figcaption></figure>
+      <figure class="plate narrow"><img src="../assets/projects/deb_detect.webp" alt="Detection output on a held out test image." width="482" height="471" loading="lazy"><figcaption>Fig. 2. Detection output on a held out test image.</figcaption></figure>
+      <figure class="eq"><div class="eq-panel"><img src="../assets/projects/eq_deb_bbox.png" alt="Localization loss, penalizing a box in the wrong place or of the wrong size." width="460" height="275" loading="lazy"></div><figcaption>Eq. 1. Localization loss, penalizing a box in the wrong place or of the wrong size.</figcaption></figure>
+    </div>
+  </section>
+  <section class="proj-sec" aria-labelledby="s03">
+    <div class="sec-text">
+      <h2 id="s03"><span class="sec-num">03</span>model two, trajectory</h2>
+      <ul>
+        <li>physics informed neural network with an LSTM layer reading trajectory history</li>
+        <li>Kepler&#x27;s third law, eccentricity limits, drag and gravity all enforced as loss terms</li>
+        <li>a plain network drifts into orbits that cannot physically exist, the constraints stop that</li>
+        <li>time derivatives modeled with gradient tape so predictions stay smooth</li>
+      </ul>
+    </div>
+    <div class="sec-media">
+      <figure class="sketch "><svg data-sketch="debris-orbit" viewBox="0 0 340 210" role="img" aria-label="faster at perigee, slower at apogee, the way a real orbit moves"></svg><figcaption>faster at perigee, slower at apogee, the way a real orbit moves</figcaption></figure>
+      <div class="eq-row"><figure class="eq"><div class="eq-panel"><img src="../assets/projects/eq_deb_pinn.png" alt="Total loss, combining prediction error with four weighted physics penalties." width="329" height="108" loading="lazy"></div><figcaption>Eq. 2. Total loss, combining prediction error with four weighted physics penalties.</figcaption></figure><figure class="eq"><div class="eq-panel"><img src="../assets/projects/eq_deb_kepler.png" alt="Kepler&#x27;s third law written as a residual. Zero when period and semi-major axis agree." width="305" height="200" loading="lazy"></div><figcaption>Eq. 3. Kepler&#x27;s third law written as a residual. Zero when period and semi-major axis agree.</figcaption></figure></div>
+      <figure class="plate narrow"><img src="../assets/projects/deb_orbit3d.webp" alt="A predicted orbit for a piece of Ariane 42P rocket debris." width="598" height="609" loading="lazy"><figcaption>Fig. 3. A predicted orbit for a piece of Ariane 42P rocket debris.</figcaption></figure>
+    </div>
+  </section>
+  <section class="proj-sec" aria-labelledby="s04">
+    <div class="sec-text">
+      <h2 id="s04"><span class="sec-num">04</span>model three, collision risk</h2>
+      <ul>
+        <li>random forest regressor, 100 decision trees on bootstrapped samples</li>
+        <li>works from relative speed, distance and approach angle</li>
+        <li>risk predicted on a log base 2 scale for resolution at low probabilities</li>
+        <li>averaging decorrelated trees cuts variance, which the formula makes explicit</li>
+      </ul>
+    </div>
+    <div class="sec-media">
+      <figure class="sketch "><svg data-sketch="debris-forest" viewBox="0 0 360 210" role="img" aria-label="inputs fan out to 100 trees and the answers are averaged"></svg><figcaption>inputs fan out to 100 trees and the answers are averaged</figcaption></figure>
+      <figure class="eq"><div class="eq-panel"><img src="../assets/projects/eq_deb_var.png" alt="Why averaging works, and why decorrelating the trees matters." width="338" height="187" loading="lazy"></div><figcaption>Eq. 4. Why averaging works, and why decorrelating the trees matters.</figcaption></figure>
+    </div>
+  </section>
+  <section class="proj-sec" aria-labelledby="s05">
+    <div class="sec-text">
+      <h2 id="s05"><span class="sec-num">05</span>the laser application</h2>
+      <ul>
+        <li>the three models feed a proposed satellite carrying a pulsed laser</li>
+        <li>focused heat vaporizes a thin surface layer, which is ablation</li>
+        <li>the plasma plume pushes the fragment onto a lower orbit until it burns up</li>
+        <li>more precise than any ground based attempt because the platform is already alongside</li>
+      </ul>
+    </div>
+    <div class="sec-media">
+      <figure class="sketch "><svg data-sketch="debris-laser" viewBox="0 0 360 200" role="img" aria-label="the ablation plume nudges the fragment onto a lower orbit"></svg><figcaption>the ablation plume nudges the fragment onto a lower orbit</figcaption></figure>
+    </div>
+  </section>
+  <section class="proj-sec" aria-labelledby="s06">
+    <div class="sec-text">
+      <h2 id="s06"><span class="sec-num">06</span>results</h2>
+      <ul>
+        <li>detection reached 95.4 percent mean average precision, 98.0 percent on recall confidence</li>
+        <li>trajectory model reached R squared 0.979 with mean squared error 0.015</li>
+        <li>collision risk model reached R squared 0.981 with mean squared error 0.014</li>
+        <li>all three run behind one interface, upload an image and get object, orbit and risk together</li>
+      </ul>
+    </div>
+    <div class="sec-media">
+      <figure class="plate "><img src="../assets/projects/deb_prcurve.webp" alt="Precision against recall for every class." width="1042" height="689" loading="lazy"><figcaption>Fig. 4. Precision against recall for every class.</figcaption></figure>
+      <figure class="plate mid"><img src="../assets/projects/deb_ui.webp" alt="The interface running detection, orbit prediction and collision scoring on one uploaded image." width="1500" height="1588" loading="lazy"><figcaption>Fig. 5. The interface running detection, orbit prediction and collision scoring on one uploaded image.</figcaption></figure>
+    </div>
+  </section>
+
+  <nav class="pager" aria-label="Other projects">
+    <a class="pager-prev" href="../portfolio.html"><span>&larr; back</span>All projects</a>
+    <a class="pager-next" href="cubesat-thermal.html"><span>next &rarr;</span>CubeSat Thermal Film</a>
+  </nav>
+
+  <footer class="foot">
+    <span class="who">Nikhil Krishna, University of Pennsylvania</span>
+    <span class="links">
+      <a href="mailto:nikhilkr@engineering.upenn.edu">nikhilkr@engineering.upenn.edu</a>
+      <a href="../assets/Nikhil_Krishna_Resume.pdf" target="_blank" rel="noopener">Resume</a>
+      <a href="https://www.linkedin.com/in/nikhil-rao-krishna" target="_blank" rel="noopener">LinkedIn</a>
+    </span>
+  </footer>
+</main>
+
+<script src="../js/vendor/rough.js"></script>
+<script src="../js/vendor/anime.min.js"></script>
+<script src="../js/vendor/motion.min.js"></script>
+<script src="../js/illustrations.js"></script>
+<script src="../js/sketches.js"></script>
+<script src="../js/main.js"></script>
+</body>
+</html>

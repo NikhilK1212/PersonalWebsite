@@ -4,125 +4,64 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nikhil Krishna</title>
-<meta name="description" content="Nikhil Krishna, Mechanical Engineering student at the University of Pennsylvania.">
+<meta name="description" content="Nikhil Krishna, Mechanical Engineering and Applied Mechanics and Physics student at the University of Pennsylvania.">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="preload" as="image" href="assets/portrait.webp">
 <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="home">
 
 <div class="frame" aria-hidden="true">
   <i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i>
 </div>
 <div class="corner-fold" aria-hidden="true"></div>
 
-<main class="page">
+<main class="page hero-page">
 
-  <div class="row contact-row">
-    <a href="mailto:nikhilkr@engineering.upenn.edu">nikhilkr@engineering.upenn.edu</a>
-    <a href="assets/Nikhil_Krishna_Resume.pdf" target="_blank" rel="noopener">Resume</a>
-    <a href="https://www.linkedin.com/in/nikhil-rao-krishna" target="_blank" rel="noopener">LinkedIn</a>
-    <a href="Design Portfolio/index.html" target="_blank" rel="noopener">Design Portfolio</a>
-  </div>
-  <div class="side-deco left" aria-hidden="true">
-    <div class="doodle" style="top:60px"><svg class="doodle-svg" id="doodleL1" viewBox="0 0 60 60"></svg></div>
-    <div class="doodle" style="top:420px"><svg class="doodle-svg" id="doodleL2" viewBox="0 0 60 60"></svg></div>
-    <div class="doodle" style="top:780px"><svg class="doodle-svg" id="doodleL3" viewBox="0 0 60 60"></svg></div>
-    <div class="doodle" style="top:1140px"><svg class="doodle-svg" id="doodleL4" viewBox="0 0 60 60"></svg></div>
-  </div>
-  <div class="side-deco right" aria-hidden="true">
-    <div class="doodle" style="top:240px"><svg class="doodle-svg" id="doodleR1" viewBox="0 0 60 60"></svg></div>
-    <div class="doodle" style="top:600px"><svg class="doodle-svg" id="doodleR2" viewBox="0 0 60 60"></svg></div>
-    <div class="doodle" style="top:960px"><svg class="doodle-svg" id="doodleR3" viewBox="0 0 60 60"></svg></div>
-    <div class="doodle" style="top:1320px"><svg class="doodle-svg" id="doodleR4" viewBox="0 0 60 60"></svg></div>
-  </div>
+  <section class="hero" aria-labelledby="heroName">
+    <div class="hero-text">
+      <h1 class="hero-name" id="heroName">Nikhil Krishna</h1>
+      <svg class="hero-underline" id="heroUnderline" viewBox="0 0 520 24" aria-hidden="true"></svg>
 
-  <h1 class="name">Nikhil Krishna</h1>
-  <p class="kicker">Mechanical Engineering &amp; Applied Mechanics and Physics, University of Pennsylvania</p>
 
-  <div class="copy">
-    <p>
-      i'm studying <strong>Mechanical Engineering &amp; Applied Mechanics and Physics at the
-      University of Pennsylvania</strong>, Class of 2030.
-    </p>
+      <dl class="title-block">
+        <div><dt>school</dt><dd>University of Pennsylvania</dd></div>
+        <div><dt>majors</dt><dd>Mechanical Engineering<br>Applied Mechanics &amp; Physics</dd></div>
+        <div><dt>class</dt><dd>2030</dd></div>
+      </dl>
 
-    <p>before Penn, at <strong>TJHSST</strong>, i kept busy:</p>
-  </div>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="portfolio.html">Design Portfolio <span aria-hidden="true">&rarr;</span></a>
+        <a class="btn" href="assets/Nikhil_Krishna_Resume.pdf" target="_blank" rel="noopener">Resume</a>
+        <a class="btn" href="https://www.linkedin.com/in/nikhil-rao-krishna" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
 
-  <div class="fact-block">
-    <p>
-      as a <strong>NASA SEES</strong> research intern at UT Austin (5% acceptance rate), i proposed
-      a bioinspired PDMS film for passive CubeSat thermal control.
-      <a class="proof-link" href="https://ssrn.com/abstract=7271839" target="_blank" rel="noopener">Read the paper &rarr;</a>
-      i separately researched CubeSat digipeater software at <strong>George Washington
-      University</strong>.
-    </p>
-    <figure class="fact-figure">
-      <svg class="fact-art" id="satSvg" viewBox="0 0 200 200" aria-hidden="true">
-        <g class="sat-rig">
-          <g id="satMount"></g>
-          <circle class="sat-light" cx="118" cy="60" r="2.5" />
-        </g>
-      </svg>
+      <p class="hero-mail"><a href="mailto:nikhilkr@engineering.upenn.edu">nikhilkr@engineering.upenn.edu</a></p>
+    </div>
+
+    <figure class="portrait">
+      <div class="portrait-frame">
+        <img src="assets/portrait.webp" srcset="assets/portrait-sm.webp 400w, assets/portrait.webp 592w"
+             sizes="(max-width: 860px) 70vw, 400px" width="592" height="740"
+             alt="Nikhil Krishna, smiling, in a black shirt">
+        <i class="tick tl"></i><i class="tick tr"></i><i class="tick bl"></i><i class="tick br"></i>
+        <svg class="portrait-dim" id="portraitDim" viewBox="0 0 40 400" preserveAspectRatio="none" aria-hidden="true"></svg>
+      </div>
     </figure>
-  </div>
 
-  <div class="fact-block reverse">
-    <figure class="fact-figure">
-      <svg class="fact-art" id="debrisSvg" viewBox="0 0 220 150" aria-hidden="true">
-        <g id="debrisMount"></g>
-        <path id="orbitA" class="orbit" d="M 15,88 A 95,40 0 1,0 205,88 A 95,40 0 1,0 15,88" />
-        <path id="orbitB" class="orbit" d="M 32,58 A 74,26 0 1,0 188,58 A 74,26 0 1,0 32,58" />
-        <g id="debrisFrags"></g>
-      </svg>
-    </figure>
-    <p>
-      for <strong>ISEF</strong>, i built a machine learning framework for space debris
-      surveillance. it placed 4th in Physics &amp; Astronomy and picked up <strong>12
-      awards</strong> along the way.
-      <a class="proof-link" href="https://ssrn.com/abstract=5367113" target="_blank" rel="noopener">Read the paper &rarr;</a>
-    </p>
-  </div>
+    <div class="hero-doodles" aria-hidden="true">
+      <svg class="doodle-svg hd hd1" id="doodleL1" viewBox="0 0 60 60"></svg>
+      <svg class="doodle-svg hd hd2" id="doodleR1" viewBox="0 0 60 60"></svg>
+      <svg class="doodle-svg hd hd3" id="doodleL2" viewBox="0 0 60 60"></svg>
+    </div>
+  </section>
 
-  <div class="copy">
-    <ul>
-      <li>co-founded <strong>DMV Debate</strong>, scaling a peer-taught program to 600+ students across 5 states</li>
-      <li>led <strong>TJ Space Program</strong> as Co-President, directing CAD work on a high-altitude balloon payload</li>
-      <li>graduated with a <strong>3.96 GPA</strong> and was named a National Merit Commended Scholar</li>
-    </ul>
-  </div>
-
-  <div class="fact-block">
-    <p>
-      my application to <strong>Penn Electric Racing</strong> required the rigorous
-      first-principles derivation of a full braking system. now i'm contributing to the vehicle
-      dynamics team, working toward the team's larger goal of moving the car from rear-wheel to
-      four-wheel drive.
-    </p>
-    <figure class="fact-figure">
-      <svg class="fact-art" id="carSvg" viewBox="0 0 260 130" aria-hidden="true">
-        <g class="car-rig">
-          <g id="carMount"></g>
-          <g id="carWheelFront" transform="translate(35,96)"><g class="car-wheel-spin"></g></g>
-          <g id="carWheelRear" transform="translate(160,98)"><g class="car-wheel-spin"></g></g>
-        </g>
-      </svg>
-    </figure>
-  </div>
-
-  <hr>
-
-  <div class="row contact-row">
-    <a href="mailto:nikhilkr@engineering.upenn.edu">nikhilkr@engineering.upenn.edu</a>
-    <a href="assets/Nikhil_Krishna_Resume.pdf" target="_blank" rel="noopener">Resume</a>
-    <a href="https://www.linkedin.com/in/nikhil-rao-krishna" target="_blank" rel="noopener">LinkedIn</a>
-    <a href="Design Portfolio/index.html" target="_blank" rel="noopener">Design Portfolio</a>
-  </div>
 </main>
 
 <script src="js/vendor/rough.js"></script>
 <script src="js/vendor/anime.min.js"></script>
 <script src="js/vendor/motion.min.js"></script>
 <script src="js/illustrations.js"></script>
-<script src="js/main.js"></script>
+<script src="js/home.js"></script>
 </body>
 </html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CubeSat Thermal Film | Nikhil Krishna</title>
+<meta name="description" content="Thermal Control of CubeSats using Micro-structured Films. A project from Nikhil Krishna&#x27;s design portfolio.">
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<div class="frame" aria-hidden="true">
+  <i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i>
+</div>
+<div class="corner-fold" aria-hidden="true"></div>
+
+<main class="page">
+  <div class="side-deco left" aria-hidden="true">
+    <div class="doodle" style="top:120px"><svg class="doodle-svg" id="doodleL1" viewBox="0 0 60 60"></svg></div>
+    <div class="doodle" style="top:900px"><svg class="doodle-svg" id="doodleL2" viewBox="0 0 60 60"></svg></div>
+    <div class="doodle" style="top:1700px"><svg class="doodle-svg" id="doodleL3" viewBox="0 0 60 60"></svg></div>
+  </div>
+  <div class="side-deco right" aria-hidden="true">
+    <div class="doodle" style="top:480px"><svg class="doodle-svg" id="doodleR1" viewBox="0 0 60 60"></svg></div>
+    <div class="doodle" style="top:1300px"><svg class="doodle-svg" id="doodleR2" viewBox="0 0 60 60"></svg></div>
+    <div class="doodle" style="top:2100px"><svg class="doodle-svg" id="doodleR3" viewBox="0 0 60 60"></svg></div>
+  </div>
+  <header class="topbar">
+    <a class="brand" href="../index.html">Nikhil Krishna</a>
+    <nav aria-label="Site">
+      <a href="../index.html">Home</a>
+      <a href="../portfolio.html" aria-current="page">Design Portfolio</a>
+      <a href="../assets/Nikhil_Krishna_Resume.pdf" target="_blank" rel="noopener">Resume</a>
+      <a href="https://www.linkedin.com/in/nikhil-rao-krishna" target="_blank" rel="noopener">LinkedIn</a>
+    </nav>
+  </header>
+
+  <div class="proj-head">
+    <div>
+      <p class="proj-tag"><a href="../portfolio.html">&larr; all projects</a></p>
+      <h1 class="proj-title">Thermal Control of CubeSats using Micro-structured Films</h1>
+      <p class="proj-summary">a passive film, modeled on the Saharan silver ant, to keep CubeSat electronics cool</p>
+    </div>
+    <dl class="spec">
+      <div><dt>project</dt><dd>02 of 05</dd></div>
+      <div><dt>event</dt><dd>NASA SEES</dd></div>
+      <div><dt>credit</dt><dd>Research conducted through the NASA STEM Enhancement in Earth Science internship, mentored by Bridget Kimsey.</dd></div>
+      <div><dt>links</dt><dd><a class="proof-link" href="https://ssrn.com/abstract=7271839" target="_blank" rel="noopener">Read the paper &rarr;</a></dd></div>
+    </dl>
+  </div>
+
+  <section class="proj-sec" aria-labelledby="s01">
+    <div class="sec-text">
+      <h2 id="s01"><span class="sec-num">01</span>the problem</h2>
+      <ul>
+        <li>CubeSats are shoebox sized with almost no mass budget for cooling hardware</li>
+        <li>AI chips on board run hot and absorbed sunlight adds to the load</li>
+        <li>radiation flips bits in memory and corrupts what the chip computes</li>
+        <li>radiation hardened parts exist but lag commercial chips badly on performance</li>
+      </ul>
+    </div>
+    <div class="sec-media">
+      <figure class="sketch "><svg data-sketch="cubesat-heat" viewBox="0 0 300 210" role="img" aria-label="sunlight and chip heat both land on a 1U frame"></svg><figcaption>sunlight and chip heat both land on a 1U frame</figcaption></figure>
+      <figure class="sketch solo"><svg data-sketch="bitflip" viewBox="0 0 340 160" role="img" aria-label="a charged particle flips one stored bit, after Cui, M., 2022"></svg><figcaption>a charged particle flips one stored bit, after Cui, M., 2022</figcaption></figure>
+    </div>
+  </section>
+  <section class="proj-sec" aria-labelledby="s02">
+    <div class="sec-text">
+      <h2 id="s02"><span class="sec-num">02</span>the mechanism</h2>
+      <ul>
+        <li>the Saharan silver ant survives midday desert heat with no active cooling</li>
+        <li>its hairs have a triangular cross section that drives total internal reflection</li>
+        <li>the same geometry raises emission in the mid infrared</li>
+        <li>reflecting and radiating at once is exactly what a satellite face needs</li>
+      </ul>
+    </div>
+    <div class="sec-media">
+      <figure class="sketch "><svg data-sketch="tir-prism" viewBox="0 0 320 220" role="img" aria-label="light bouncing out of one triangular hair, after Shi, N. N. et al., 2015"></svg><figcaption>light bouncing out of one triangular hair, after Shi, N. N. et al., 2015</figcaption></figure>
+      <figure class="plate mid"><img src="../assets/projects/see_sem.webp" alt="Electron microscope images of the ant&#x27;s hairs and their triangular cross section. Source: Shi, N. N. et al., 2015, Science." width="1242" height="1244" loading="lazy"><figcaption>Fig. 1. Electron microscope images of the ant&#x27;s hairs and their triangular cross section. Source: Shi, N. N. et al., 2015, Science.</figcaption></figure>
+    </div>
+  </section>
+  <section class="proj-sec" aria-labelledby="s03">
+    <div class="sec-text">
+      <h2 id="s03"><span class="sec-num">03</span>the proposed film</h2>
+      <ul>
+        <li>replicate that triangular microstructure in a thin silicone film</li>
+        <li>mount on the minus Z face and couple it to the internal electronics</li>
+        <li>passive throughout, no power draw and almost no added mass</li>
+      </ul>
+    </div>
+    <div class="sec-media">
+      <figure class="sketch "><svg data-sketch="film-layer" viewBox="0 0 360 210" role="img" aria-label="the film reflects sunlight and radiates heat, after Jung, J. et al., 2023"></svg><figcaption>the film reflects sunlight and radiates heat, after Jung, J. et al., 2023</figcaption></figure>
+    </div>
+  </section>
+  <section class="proj-sec cells-only" aria-labelledby="s04">
+    <h2 id="s04"><span class="sec-num">04</span>results</h2>
+      <ul class="cells">
+        <li>research conducted through the NASA STEM Enhancement in Earth Science Internship</li>
+        <li>paper published on SSRN and available to read</li>
+        <li>literature supports solar reflectance above 95 percent for this structure class</li>
+        <li>passive throughout, so it draws no power and adds almost no mass to the satellite</li>
+      </ul>
+  </section>
+
+  <nav class="pager" aria-label="Other projects">
+    <a class="pager-prev" href="space-debris.html"><span>&larr; previous</span>Space Debris</a>
+    <a class="pager-next" href="brake-pedal.html"><span>next &rarr;</span>Brake Pedal</a>
+  </nav>
+
+  <footer class="foot">
+    <span class="who">Nikhil Krishna, University of Pennsylvania</span>
+    <span class="links">
+      <a href="mailto:nikhilkr@engineering.upenn.edu">nikhilkr@engineering.upenn.edu</a>
+      <a href="../assets/Nikhil_Krishna_Resume.pdf" target="_blank" rel="noopener">Resume</a>
+      <a href="https://www.linkedin.com/in/nikhil-rao-krishna" target="_blank" rel="noopener">LinkedIn</a>
+    </span>
+  </footer>
+</main>
+
+<script src="../js/vendor/rough.js"></script>
+<script src="../js/vendor/anime.min.js"></script>
+<script src="../js/vendor/motion.min.js"></script>
+<script src="../js/illustrations.js"></script>
+<script src="../js/sketches.js"></script>
+<script src="../js/main.js"></script>
+</body>
+</html>
