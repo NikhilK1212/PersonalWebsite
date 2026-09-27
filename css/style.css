@@ -411,8 +411,6 @@ li::marker { color: var(--ink-faint); }
   transform: rotate(-1deg);
   transform-origin: left center;
 }
-.page-lede { font-size: 1.15rem; color: var(--ink-soft); max-width: 48em; margin-bottom: 44px; }
-
 /* ---------------- Portfolio grid ---------------- */
 
 .proj-grid {
