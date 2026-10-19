@@ -380,6 +380,80 @@ li::marker { color: var(--ink-faint); }
   .corner-fold { width: 44px; height: 44px; }
 }
 
+/* ---------------- Contact (landing) ---------------- */
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+.contact-page { padding-top: 24px; padding-bottom: 96px; }
+.contact {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(32px, 5vw, 72px);
+  padding: clamp(24px, 4vw, 44px);
+  border: 1.5px solid var(--line-strong);
+  background: rgba(22, 61, 96, 0.45);
+  align-items: start;
+}
+.contact-title {
+  font-family: var(--font-hand);
+  font-weight: 400;
+  font-size: clamp(2.2rem, 4vw, 3rem);
+  line-height: 1.1;
+  color: var(--ink);
+  margin: 0 0 16px;
+  transform: rotate(-1deg);
+  transform-origin: left bottom;
+}
+.contact-intro p { color: var(--ink-soft); max-width: 30em; }
+.contact-direct { font-size: 0.98rem; line-height: 1.8; }
+.copy-btn {
+  margin-left: 8px;
+  padding: 2px 10px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--line-strong);
+  vertical-align: 1px;
+}
+.copy-btn:hover, .copy-btn:focus-visible { border-color: var(--ink); }
+
+.contact-form { display: grid; gap: 6px; }
+.contact-form label {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-top: 10px;
+}
+.contact-form label:first-child { margin-top: 0; }
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 11px 13px;
+  font: inherit;
+  font-size: 1rem;
+  color: var(--ink);
+  background: rgba(14, 40, 64, 0.6);
+  border: 1.5px solid var(--line-strong);
+  border-radius: 0;
+}
+.contact-form textarea { resize: vertical; min-height: 140px; }
+.contact-form input:focus,
+.contact-form textarea:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--ink); }
+.contact-form .btn { justify-self: start; margin-top: 18px; }
+.form-note { margin: 4px 0 0; font-size: 0.92rem; color: var(--accent); min-height: 1.5em; max-width: none; }
+
+@media (max-width: 860px) {
+  .contact { grid-template-columns: 1fr; }
+  .contact-form .btn { justify-self: stretch; justify-content: center; }
+}
+
 /* ---------------- Page header (portfolio + projects) ---------------- */
 
 .topbar {

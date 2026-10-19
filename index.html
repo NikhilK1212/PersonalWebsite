@@ -34,6 +34,7 @@
         <a class="btn btn-primary" href="portfolio.html">Design Portfolio <span aria-hidden="true">&rarr;</span></a>
         <a class="btn" href="assets/Nikhil_Krishna_Resume.pdf" target="_blank" rel="noopener">Resume</a>
         <a class="btn" href="https://www.linkedin.com/in/nikhil-rao-krishna" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="#contact">Get in touch</a>
       </div>
 
       <p class="hero-mail"><a href="mailto:nikhilkr@engineering.upenn.edu">nikhilkr@engineering.upenn.edu</a></p>
@@ -58,10 +59,36 @@
 
 </main>
 
+<section class="page contact-page" id="contact" aria-labelledby="contactTitle">
+  <div class="contact">
+    <div class="contact-intro">
+      <h2 class="contact-title" id="contactTitle">get in touch</h2>
+      <p>Questions about my projects or research, or an opportunity you think I'd be a fit for? Send me a message and I'll get back to you.</p>
+      <p class="contact-direct">
+        Or email me directly:<br>
+        <a href="mailto:nikhilkr@engineering.upenn.edu">nikhilkr@engineering.upenn.edu</a>
+        <button type="button" class="copy-btn" id="copyEmail" data-email="nikhilkr@engineering.upenn.edu">Copy</button>
+      </p>
+    </div>
+
+    <form class="contact-form" id="contactForm" action="mailto:nikhilkr@engineering.upenn.edu" method="post" enctype="text/plain">
+      <label for="cfName">Name</label>
+      <input id="cfName" name="name" type="text" autocomplete="name" required>
+      <label for="cfEmail">Your email</label>
+      <input id="cfEmail" name="email" type="email" autocomplete="email" required>
+      <label for="cfMessage">Message</label>
+      <textarea id="cfMessage" name="message" rows="6" required></textarea>
+      <button class="btn btn-primary" type="submit">Send message <span aria-hidden="true">&rarr;</span></button>
+      <p class="form-note" id="formNote" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+
 <script src="js/vendor/rough.js"></script>
 <script src="js/vendor/anime.min.js"></script>
 <script src="js/vendor/motion.min.js"></script>
 <script src="js/illustrations.js"></script>
 <script src="js/home.js"></script>
+<script src="js/contact.js"></script>
 </body>
 </html>
