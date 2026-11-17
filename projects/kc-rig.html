@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>K&amp;C Test Rig | Nikhil Krishna</title>
+<meta name="description" content="Kinematics and Compliance Test Rig. A project from Nikhil Krishna&#x27;s design portfolio.">
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<div class="frame" aria-hidden="true">
+  <i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i>
+</div>
+<div class="corner-fold" aria-hidden="true"></div>
+
+<main class="page">
+  <div class="side-deco left" aria-hidden="true">
+    <div class="doodle" style="top:120px"><svg class="doodle-svg" id="doodleL1" viewBox="0 0 60 60"></svg></div>
+    <div class="doodle" style="top:900px"><svg class="doodle-svg" id="doodleL2" viewBox="0 0 60 60"></svg></div>
+    <div class="doodle" style="top:1700px"><svg class="doodle-svg" id="doodleL3" viewBox="0 0 60 60"></svg></div>
+  </div>
+  <div class="side-deco right" aria-hidden="true">
+    <div class="doodle" style="top:480px"><svg class="doodle-svg" id="doodleR1" viewBox="0 0 60 60"></svg></div>
+    <div class="doodle" style="top:1300px"><svg class="doodle-svg" id="doodleR2" viewBox="0 0 60 60"></svg></div>
+    <div class="doodle" style="top:2100px"><svg class="doodle-svg" id="doodleR3" viewBox="0 0 60 60"></svg></div>
+  </div>
+  <header class="topbar">
+    <a class="brand" href="../index.html">Nikhil Krishna</a>
+    <nav aria-label="Site">
+      <a href="../index.html">Home</a>
+      <a href="../portfolio.html" aria-current="page">Design Portfolio</a>
+      <a href="../assets/Nikhil_Krishna_Resume.pdf" target="_blank" rel="noopener">Resume</a>
+      <a href="https://www.linkedin.com/in/nikhil-rao-krishna" target="_blank" rel="noopener">LinkedIn</a>
+    </nav>
+  </header>
+
+  <div class="proj-head">
+    <div>
+      <p class="proj-tag"><a href="../portfolio.html">&larr; all projects</a></p>
+      <h1 class="proj-title">Kinematics and Compliance Test Rig</h1>
+      <p class="proj-summary">rebuilding the rig that measures how much the suspension really deflects under cornering load, so the car is set up on measured data instead of CAD assumptions</p>
+    </div>
+    <dl class="spec">
+      <div><dt>project</dt><dd>03 of 08</dd></div>
+      <div><dt>team</dt><dd>Penn Electric Racing, suspension</dd></div>
+      <div><dt>status</dt><dd>In design, preliminary design review November 21</dd></div>
+      <div><dt>credit</dt><dd>Three person design team inside the suspension subteam, redesigning the rig for this season.</dd></div>
+    </dl>
+  </div>
+  <section class="proj-sec" aria-labelledby="s01">
+    <div class="sec-text">
+      <h2 id="s01"><span class="sec-num">01</span>why compliance matters</h2>
+      <ul>
+        <li>compliance is how far camber and toe shift for a given lateral load at the contact patch</li>
+        <li>every link, bushing and tab in the corner bends a little, and those small deflections add up at the tire</li>
+        <li>it is the only way to check that the kinematics designed in CAD actually happen on the car</li>
+        <li>with measured compliance, the suspension setup can be tuned to keep the tire at its best angle and get the most grip</li>
+      </ul>
+    </div>
+    <div class="sec-media">
+      <figure class="sketch "><svg data-sketch="kc-compliance" viewBox="0 0 360 220" role="img" aria-label="a lateral load at the contact patch steers the tire, redrawn from our design review"></svg><figcaption>a lateral load at the contact patch steers the tire, redrawn from our design review</figcaption></figure>
+    </div>
+  </section>
+  <section class="proj-sec" aria-labelledby="s02">
+    <div class="sec-text">
+      <h2 id="s02"><span class="sec-num">02</span>what last season&#x27;s rig got wrong</h2>
+      <ul>
+        <li>the wheel steered and spun as soon as the pull was applied, so the readings mixed compliance with free motion</li>
+        <li>a ratchet strap applied the load, and nothing held its line of action in place</li>
+        <li>this season the rig has to do three things: lock the steering rack, stop the hub from turning, and apply a large load that can be measured</li>
+      </ul>
+    </div>
+    <div class="sec-media">
+      <div class="fig-pair"><figure class="plate "><img src="../assets/projects/kc_old1.webp" alt="Last season&#x27;s compliance rig clamped to the car." width="581" height="672" loading="lazy"><figcaption>Fig. 1. Last season&#x27;s compliance rig clamped to the car.</figcaption></figure><figure class="plate "><img src="../assets/projects/kc_old2.webp" alt="The same rig from the front, loaded with a ratchet strap." width="585" height="680" loading="lazy"><figcaption>Fig. 2. The same rig from the front, loaded with a ratchet strap.</figcaption></figure></div>
+    </div>
+  </section>
+  <section class="proj-sec" aria-labelledby="s03">
+    <div class="sec-text">
+      <h2 id="s03"><span class="sec-num">03</span>locking the steering rack</h2>
+      <ul>
+        <li>shims slide over the steer bar between the rack housing and the tie rod clevis</li>
+        <li>CAD puts that gap at 1.45 inches</li>
+        <li>a stack of 1/4, 1/8 and 1/16 inch slotted stainless shims fills it to within 0.0125 inch</li>
+        <li>off the shelf parts, so the rack can be locked and unlocked without changing the car</li>
+      </ul>
+    </div>
+    <div class="sec-media">
+      <figure class="sketch "><svg data-sketch="kc-lock" viewBox="0 0 340 200" role="img" aria-label="the shim stack filling the gap between rack housing and clevis"></svg><figcaption>the shim stack filling the gap between rack housing and clevis</figcaption></figure>
+      <figure class="plate mid"><img src="../assets/projects/kc_shims.webp" alt="The shim stack modeled on the steer bar in CAD." width="893" height="683" loading="lazy"><figcaption>Fig. 3. The shim stack modeled on the steer bar in CAD.</figcaption></figure>
+    </div>
+  </section>
+  <section class="proj-sec" aria-labelledby="s04">
+    <div class="sec-text">
+      <h2 id="s04"><span class="sec-num">04</span>stopping the hub from turning</h2>
+      <ul>
+        <li>brake rotor and caliper come off for the test</li>
+        <li>a spacer bolts from the rig to the caliper mounting point, through a new hole drilled in the rig</li>
+        <li>the pull is perpendicular to the rig, so the spacer should carry no load and only stops rotation</li>
+        <li>spacers still get their own analysis before machining, to prove they hold the hub fully constrained</li>
+      </ul>
+    </div>
+    <div class="sec-media">
+      <figure class="plate narrow"><img src="../assets/projects/kc_hub.webp" alt="The rig plate bolted to the upright, with the spacer at the caliper mount." width="525" height="485" loading="lazy"><figcaption>Fig. 4. The rig plate bolted to the upright, with the spacer at the caliper mount.</figcaption></figure>
+    </div>
+  </section>
+  <section class="proj-sec" aria-labelledby="s05">
+    <div class="sec-text">
+      <h2 id="s05"><span class="sec-num">05</span>applying a real load, about 2700 N</h2>
+      <ul>
+        <li>a turnbuckle replaces the ratchet strap and is tightened to set the load</li>
+        <li>a load cell in line with the turnbuckle reads the force directly</li>
+        <li>the far end anchors to a bracket on an I-beam laid under the car, so the line of action stays fixed</li>
+        <li>the 1/2 inch thread is rated to 2200 lbf, roughly 3.6 times the test load</li>
+        <li>the bracket that ties the turnbuckle to the I-beam is being sized with FEA</li>
+      </ul>
+    </div>
+    <div class="sec-media">
+      <figure class="sketch "><svg data-sketch="kc-loadpath" viewBox="0 0 380 220" role="img" aria-label="the load path, from the I-beam through the load cell into the rig at the hub"></svg><figcaption>the load path, from the I-beam through the load cell into the rig at the hub</figcaption></figure>
+      <figure class="plate "><img src="../assets/projects/kc_ibeam.webp" alt="Full car in CAD with the rig on one corner and the I-beam under it." width="1140" height="507" loading="lazy"><figcaption>Fig. 5. Full car in CAD with the rig on one corner and the I-beam under it.</figcaption></figure>
+      <div class="fig-pair"><figure class="plate "><img src="../assets/projects/kc_loadcell.webp" alt="Turnbuckle with the load cell wired in line." width="975" height="506" loading="lazy"><figcaption>Fig. 6. Turnbuckle with the load cell wired in line.</figcaption></figure><figure class="plate "><img src="../assets/projects/kc_bracket.webp" alt="Proposed bracket from the I-beam up to the rig, marked in red." width="757" height="602" loading="lazy"><figcaption>Fig. 7. Proposed bracket from the I-beam up to the rig, marked in red.</figcaption></figure></div>
+    </div>
+  </section>
+  <section class="proj-sec cells-only" aria-labelledby="s06">
+    <h2 id="s06"><span class="sec-num">06</span>status and next steps</h2>
+      <ul class="cells">
+        <li>preliminary design review on November 21</li>
+        <li>match the chassis height on jack stands to the I-beam position in CAD</li>
+        <li>run FEA on the I-beam bracket to find its failure point</li>
+        <li>design a second bracket to measure toe compliance</li>
+        <li>calibrate the load cell and machine the hub and castle nut spacers</li>
+      </ul>
+  </section>
+
+  <nav class="pager" aria-label="Other projects">
+    <a class="pager-prev" href="cubesat-thermal.html"><span>&larr; previous</span>CubeSat Thermal Film</a>
+    <a class="pager-next" href="control-arm-tabs.html"><span>next &rarr;</span>Control Arm Tabs</a>
+  </nav>
+
+  <footer class="foot">
+    <span class="who">Nikhil Krishna, University of Pennsylvania</span>
+    <span class="links">
+      <a href="mailto:nikhilkr@engineering.upenn.edu">nikhilkr@engineering.upenn.edu</a>
+      <a href="../assets/Nikhil_Krishna_Resume.pdf" target="_blank" rel="noopener">Resume</a>
+      <a href="https://www.linkedin.com/in/nikhil-rao-krishna" target="_blank" rel="noopener">LinkedIn</a>
+    </span>
+  </footer>
+</main>
+
+<script src="../js/vendor/rough.js"></script>
+<script src="../js/vendor/anime.min.js"></script>
+<script src="../js/vendor/motion.min.js"></script>
+<script src="../js/illustrations.js"></script>
+<script src="../js/sketches.js"></script>
+<script src="../js/main.js"></script>
+</body>
+</html>

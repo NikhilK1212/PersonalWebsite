@@ -487,6 +487,25 @@ html { scroll-behavior: smooth; }
 }
 /* ---------------- Portfolio grid ---------------- */
 
+.proj-group {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 6px 20px;
+  border-bottom: 1px dashed var(--line-strong);
+  padding-bottom: 12px;
+  margin: 56px 0 30px;
+}
+.page-title + .proj-group { margin-top: 36px; }
+.proj-group h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: var(--ink);
+  margin: 0;
+}
+.proj-group p { margin: 0; color: var(--ink-faint); font-size: 1rem; }
+
 .proj-grid {
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
@@ -749,9 +768,11 @@ html { scroll-behavior: smooth; }
 .sk-nudge { animation: sk-nudge 2.6s ease-in-out infinite; }
 @keyframes sk-nudge { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(6px); } }
 .sk-beam { animation: sk-flow 0.9s linear infinite, sk-pulse 1.8s ease-in-out infinite; }
+.sk-seat { animation: sk-seat 3.4s ease-in-out infinite; }
+@keyframes sk-seat { 0%, 18% { transform: translateY(-9px); } 48%, 100% { transform: translateY(0); } }
 
 @media (prefers-reduced-motion: reduce) {
-  .sk-flow, .sk-scan, .sk-pulse, .sk-rise, .sk-nudge, .sk-beam { animation: none; }
+  .sk-flow, .sk-scan, .sk-pulse, .sk-rise, .sk-nudge, .sk-beam, .sk-seat { animation: none; }
   .btn, .proj-card, .pager a { transition: none; }
   .btn:hover, .proj-card:hover { transform: none; }
 }

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Control Arm Tabs | Nikhil Krishna</title>
+<meta name="description" content="Control Arm Mounting Tabs. A project from Nikhil Krishna&#x27;s design portfolio.">
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<div class="frame" aria-hidden="true">
+  <i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i>
+</div>
+<div class="corner-fold" aria-hidden="true"></div>
+
+<main class="page">
+  <div class="side-deco left" aria-hidden="true">
+    <div class="doodle" style="top:120px"><svg class="doodle-svg" id="doodleL1" viewBox="0 0 60 60"></svg></div>
+    <div class="doodle" style="top:900px"><svg class="doodle-svg" id="doodleL2" viewBox="0 0 60 60"></svg></div>
+    <div class="doodle" style="top:1700px"><svg class="doodle-svg" id="doodleL3" viewBox="0 0 60 60"></svg></div>
+  </div>
+  <div class="side-deco right" aria-hidden="true">
+    <div class="doodle" style="top:480px"><svg class="doodle-svg" id="doodleR1" viewBox="0 0 60 60"></svg></div>
+    <div class="doodle" style="top:1300px"><svg class="doodle-svg" id="doodleR2" viewBox="0 0 60 60"></svg></div>
+    <div class="doodle" style="top:2100px"><svg class="doodle-svg" id="doodleR3" viewBox="0 0 60 60"></svg></div>
+  </div>
+  <header class="topbar">
+    <a class="brand" href="../index.html">Nikhil Krishna</a>
+    <nav aria-label="Site">
+      <a href="../index.html">Home</a>
+      <a href="../portfolio.html" aria-current="page">Design Portfolio</a>
+      <a href="../assets/Nikhil_Krishna_Resume.pdf" target="_blank" rel="noopener">Resume</a>
+      <a href="https://www.linkedin.com/in/nikhil-rao-krishna" target="_blank" rel="noopener">LinkedIn</a>
+    </nav>
+  </header>
+
+  <div class="proj-head">
+    <div>
+      <p class="proj-tag"><a href="../portfolio.html">&larr; all projects</a></p>
+      <h1 class="proj-title">Control Arm Mounting Tabs</h1>
+      <p class="proj-summary">the welded tabs that carry every suspension load from the control arms into the frame</p>
+    </div>
+    <dl class="spec">
+      <div><dt>project</dt><dd>04 of 08</dd></div>
+      <div><dt>team</dt><dd>Penn Electric Racing, suspension</dd></div>
+      <div><dt>credit</dt><dd>Designed, fit checked and analyzed by me in CAD for the suspension subteam.</dd></div>
+    </dl>
+  </div>
+  <section class="proj-sec" aria-labelledby="s01">
+    <div class="sec-text">
+      <h2 id="s01"><span class="sec-num">01</span>the problem</h2>
+      <ul>
+        <li>each control arm ends in a rod end that bolts to a pair of tabs welded on the frame</li>
+        <li>cornering, braking and bump loads all pass through these tabs into the chassis</li>
+        <li>they have to hold the pickup point exactly where the suspension geometry puts it</li>
+        <li>and they have to fit around round frame tubes meeting at awkward angles</li>
+      </ul>
+    </div>
+    <div class="sec-media">
+      <figure class="sketch "><svg data-sketch="tab-fea" viewBox="0 0 360 215" role="img" aria-label="a double shear tab, fixed along its weld and loaded at the bolt"></svg><figcaption>a double shear tab, fixed along its weld and loaded at the bolt</figcaption></figure>
+    </div>
+  </section>
+  <section class="proj-sec" aria-labelledby="s02">
+    <div class="sec-text">
+      <h2 id="s02"><span class="sec-num">02</span>first design and fit check</h2>
+      <ul>
+        <li>first version was a C shaped double shear tab, one plate bent around so the bolt is supported on both sides</li>
+        <li>checking it in the frame assembly showed the top corner running into a chassis tube</li>
+        <li>an interference check marked the overlap in red, so the part could not be built as drawn</li>
+      </ul>
+    </div>
+    <div class="sec-media">
+      <div class="fig-pair"><figure class="plate "><img src="../assets/projects/tab_ctab.webp" alt="The C shaped tab on the frame, with the problem corner circled." width="637" height="685" loading="lazy"><figcaption>Fig. 1. The C shaped tab on the frame, with the problem corner circled.</figcaption></figure><figure class="plate "><img src="../assets/projects/tab_clash.webp" alt="Interference check, overlap with the tube shown in red." width="636" height="591" loading="lazy"><figcaption>Fig. 2. Interference check, overlap with the tube shown in red.</figcaption></figure></div>
+    </div>
+  </section>
+  <section class="proj-sec" aria-labelledby="s03">
+    <div class="sec-text">
+      <h2 id="s03"><span class="sec-num">03</span>finite element analysis</h2>
+      <ul>
+        <li>meshed the tab in fine tetrahedral elements</li>
+        <li>fixed every edge that gets welded to the frame</li>
+        <li>applied the control arm load as a bearing load on the bolt holes</li>
+        <li>the goal is to find where the tab sees its peak stress before any metal is cut</li>
+      </ul>
+    </div>
+    <div class="sec-media">
+      <figure class="plate mid"><img src="../assets/projects/tab_fea.webp" alt="FEA setup, weld edges fixed in green and the bolt load in pink." width="721" height="823" loading="lazy"><figcaption>Fig. 3. FEA setup, weld edges fixed in green and the bolt load in pink.</figcaption></figure>
+    </div>
+  </section>
+  <section class="proj-sec" aria-labelledby="s04">
+    <div class="sec-text">
+      <h2 id="s04"><span class="sec-num">04</span>revised tab</h2>
+      <ul>
+        <li>reworked as a bent tab with a coped edge that wraps the tube</li>
+        <li>the cope sits flush on the tube, which clears the interference and leaves a clean joint to weld</li>
+      </ul>
+    </div>
+    <div class="sec-media">
+      <figure class="sketch "><svg data-sketch="tab-cope" viewBox="0 0 340 215" role="img" aria-label="a square edge clashes with the tube, a coped edge sits on it"></svg><figcaption>a square edge clashes with the tube, a coped edge sits on it</figcaption></figure>
+      <figure class="plate mid"><img src="../assets/projects/tab_final.webp" alt="The revised tab, with the coped edge on the left." width="676" height="565" loading="lazy"><figcaption>Fig. 4. The revised tab, with the coped edge on the left.</figcaption></figure>
+    </div>
+  </section>
+  <section class="proj-sec cells-only" aria-labelledby="s05">
+    <h2 id="s05"><span class="sec-num">05</span>results</h2>
+      <ul class="cells">
+        <li>interference removed, so the tab fits the frame as modeled</li>
+        <li>FEA boundary conditions set to match how the tab is actually welded and loaded</li>
+        <li>a coped joint that sits flush on the tube and is ready to weld</li>
+      </ul>
+  </section>
+
+  <nav class="pager" aria-label="Other projects">
+    <a class="pager-prev" href="kc-rig.html"><span>&larr; previous</span>K&amp;C Test Rig</a>
+    <a class="pager-next" href="arb-jig.html"><span>next &rarr;</span>Front ARB Welding Jig</a>
+  </nav>
+
+  <footer class="foot">
+    <span class="who">Nikhil Krishna, University of Pennsylvania</span>
+    <span class="links">
+      <a href="mailto:nikhilkr@engineering.upenn.edu">nikhilkr@engineering.upenn.edu</a>
+      <a href="../assets/Nikhil_Krishna_Resume.pdf" target="_blank" rel="noopener">Resume</a>
+      <a href="https://www.linkedin.com/in/nikhil-rao-krishna" target="_blank" rel="noopener">LinkedIn</a>
+    </span>
+  </footer>
+</main>
+
+<script src="../js/vendor/rough.js"></script>
+<script src="../js/vendor/anime.min.js"></script>
+<script src="../js/vendor/motion.min.js"></script>
+<script src="../js/illustrations.js"></script>
+<script src="../js/sketches.js"></script>
+<script src="../js/main.js"></script>
+</body>
+</html>

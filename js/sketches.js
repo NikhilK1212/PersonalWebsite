@@ -608,6 +608,145 @@
     S.text(x - 14, 120, 'pushrod', { color: 'faint', anchor: 'end' });
   };
 
+  /* PER K&C rig: a lateral load at the contact patch steers the tire (toe change). */
+  SK['kc-compliance'] = function (S) {
+    var cx = 150, cy = 110;
+    S.flow('M' + cx + ',22 L' + cx + ',198', { c: 'faint', dash: '4 6', still: true });
+    S.rect(cx - 28, cy - 66, 56, 132, { c: 'faint', w: 1.1, rough: 0.8 });
+    var tire = S.group();
+    S.rect(cx - 28, cy - 66, 56, 132, { c: 'soft', w: 1.9, fill: 'wash', gap: 7 }, tire);
+    S.line(cx, cy - 76, cx, cy + 76, { c: 'coral', w: 1.2, rough: 0.6 }, tire);
+    S.circ(cx + 32, cy - 40, 8, { c: 'ink', w: 1.4 }, tire);
+    S.circ(cx + 32, cy + 40, 8, { c: 'ink', w: 1.4 }, tire);
+    S.rock(tire, cx, cy, -5, 3.4);
+    S.line(cx + 34, cy - 40, 300, cy - 52, { c: 'soft', w: 2.2 });
+    S.line(cx + 34, cy + 40, 300, cy + 52, { c: 'soft', w: 2.2 });
+    S.circ(302, cy - 52, 9, { c: 'soft', w: 1.5 });
+    S.circ(302, cy + 52, 9, { c: 'soft', w: 1.5 });
+    S.line(316, 30, 316, 190, { c: 'faint', w: 1.3 });
+    for (var y = 36; y < 190; y += 14) S.line(316, y, 324, y - 7, { c: 'faint', w: 1, rough: 0.7 });
+    var push = S.group();
+    S.arrow(30, cy, 112, cy, { c: 'red', w: 2.4, head: 10 }, push);
+    if (!reduceMotion) push.setAttribute('class', 'sk-nudge');
+    S.text(30, cy - 14, 'lateral load', { color: 'coral' });
+    S.text(cx + 10, 18, 'toe change', { color: 'coral' });
+    S.text(300, 208, 'chassis', { color: 'faint', anchor: 'middle' });
+  };
+
+  /* PER K&C rig: the load path, I-beam anchor to turnbuckle to load cell to the rig at the hub. */
+  SK['kc-loadpath'] = function (S) {
+    S.rect(14, 176, S.W - 28, 12, { c: 'soft', w: 1.6, fill: 'wash', gap: 5 });
+    S.line(14, 196, S.W - 14, 196, { c: 'faint', w: 1.2 });
+    S.text(S.W - 18, 214, 'I-beam', { color: 'faint', anchor: 'end' });
+    S.rect(26, 140, 24, 36, { c: 'soft', w: 1.7, fill: 'wash', gap: 4 });
+    S.circ(48, 152, 7, { c: 'ink', w: 1.3 });
+    S.text(38, 214, 'bracket', { color: 'faint', anchor: 'middle' });
+    S.circ(62, 152, 12, { c: 'soft', w: 1.5 });
+    S.rect(70, 146, 46, 12, { c: 'soft', w: 1.6 });
+    S.rect(116, 142, 22, 20, { c: 'red', w: 1.7, fill: 'redwash', style: 'solid', rough: 0.8 });
+    S.rect(138, 146, 26, 12, { c: 'soft', w: 1.6 });
+    S.circ(172, 152, 12, { c: 'soft', w: 1.5 });
+    S.flow('M176,152 L58,152', { c: 'red', w: 1.6, dash: '5 8', opacity: 0.9 });
+    S.text(127, 124, 'load cell', { color: 'coral', anchor: 'middle' });
+    S.text(90, 138, 'turnbuckle', { color: 'faint', anchor: 'middle' });
+    S.text(120, 34, '~2700 N', { color: 'coral', size: 18, anchor: 'middle' });
+    S.arrow(160, 50, 90, 50, { c: 'red', w: 2, head: 9 });
+    S.line(184, 176, 204, 48, { c: 'soft', w: 2 });
+    S.line(224, 176, 204, 48, { c: 'soft', w: 2 });
+    S.line(178, 152, 230, 152, { c: 'soft', w: 1.8 });
+    S.rect(196, 70, 16, 70, { c: 'soft', w: 1.7, fill: 'wash', gap: 4 });
+    S.circ(214, 104, 26, { c: 'ink', w: 1.6 });
+    S.text(232, 58, 'rig at hub', { color: 'soft' });
+    S.line(226, 92, 280, 86, { c: 'soft', w: 1.8 });
+    S.line(226, 118, 280, 126, { c: 'soft', w: 1.8 });
+    S.rect(280, 66, 80, 76, { c: 'soft', w: 1.7, fill: 'wash', style: 'cross-hatch', gap: 9 });
+    S.poly([[300, 176], [340, 176], [320, 142]], { c: 'soft', w: 1.5 });
+    S.text(320, 58, 'chassis', { color: 'faint', anchor: 'middle' });
+  };
+
+  /* PER K&C rig: steering rack locked with a stack of slotted shims. */
+  SK['kc-lock'] = function (S) {
+    S.rect(16, 78, 110, 48, { c: 'soft', w: 1.8, fill: 'wash', gap: 6 });
+    S.text(71, 148, 'rack housing', { color: 'faint', anchor: 'middle' });
+    S.line(126, 102, S.W - 14, 102, { c: 'soft', w: 2.4 });
+    var x = 132, stack = [20, 20, 20, 20, 20, 10, 5], hs = S.group();
+    stack.forEach(function (w, i) {
+      S.rect(x, 66, w - 1.5, 72, { c: i % 2 ? 'red' : 'coral', w: 1.4, rough: 0.8 }, hs);
+      x += w;
+    });
+    if (!reduceMotion) hs.setAttribute('class', 'sk-seat');
+    var cl = x + 3;
+    S.rect(cl, 84, 30, 36, { c: 'soft', w: 1.8, fill: 'wash', gap: 4 });
+    S.circ(cl + 15, 102, 10, { c: 'ink', w: 1.4 });
+    S.text(cl + 15, 148, 'clevis', { color: 'faint', anchor: 'middle' });
+    S.dim(126, 50, cl, 50, '1.45 in', { off: -10 });
+    S.text(132, 172, '1/4, 1/8, 1/16 in shims', { color: 'coral' });
+    S.text(132, 190, '0.0125 in left over', { color: 'faint' });
+  };
+
+  /* PER REV12 front ARB jig: notched plates seat on the frame tubes and hold both tabs. */
+  SK['arb-jig'] = function (S) {
+    S.rect(14, 122, S.W - 28, 22, { c: 'soft', w: 1.8, fill: 'wash', gap: 6 });
+    S.path('M14,196 L' + (S.W - 14) + ',176 L' + (S.W - 14) + ',192 L14,212 Z', { c: 'soft', w: 1.6, fill: 'wash', gap: 6 });
+    S.text(24, 116, 'frame tubes', { color: 'faint' });
+    [150, 198].forEach(function (tx) {
+      S.rect(tx, 80, 16, 42, { c: 'soft', w: 1.7, fill: 'wash', gap: 3.5 });
+      S.circ(tx + 8, 94, 7, { c: 'ink', w: 1.3 });
+    });
+    var jig = S.group();
+    S.rect(98, 60, 164, 14, { c: 'red', w: 1.8 }, jig);
+    S.path('M104,74 L104,118 A16,16 0 0,0 104,148 L104,182 L120,180 L120,148 A16,16 0 0,0 120,118 L120,74', { c: 'red', w: 1.7 }, jig);
+    S.path('M240,74 L240,118 A16,16 0 0,1 240,148 L240,170 L256,168 L256,148 A16,16 0 0,1 256,118 L256,74', { c: 'red', w: 1.7 }, jig);
+    S.rect(98, 150, 164, 7, { c: 'red', w: 1.5 }, jig);
+    if (!reduceMotion) jig.setAttribute('class', 'sk-seat');
+    S.text(180, 40, 'jig, laser cut MDF', { color: 'coral', anchor: 'middle' });
+    S.arrow(300, 78, 220, 92, { c: 'faint', w: 1.2, head: 6 });
+    S.text(304, 82, 'ARB tabs', { color: 'soft' });
+  };
+
+  /* PER control arm tab: FEA boundary conditions, fixed at the weld, bolt load at the hole. */
+  SK['tab-fea'] = function (S) {
+    S.line(70, 40, 70, 180, { c: 'faint', w: 1.4 });
+    for (var y = 46; y < 182; y += 12) S.line(70, y, 60, y + 8, { c: 'faint', w: 1, rough: 0.7 });
+    S.path('M74,52 L282,52 L282,68 L90,68 L90,152 L282,152 L282,168 L74,168 Z', { c: 'soft', w: 1.9, fill: 'wash', gap: 7 });
+    S.flow('M222,36 L222,184', { c: 'faint', dash: '3 5', still: true });
+    var bow = el('path', { d: 'M90,52 Q186,52 282,52', fill: 'none', stroke: C.coral, 'stroke-width': 1.6 * S.k, 'stroke-dasharray': '5 5' }, S.fx);
+    if (!reduceMotion) {
+      el('animate', {
+        attributeName: 'd', dur: '3.2s', repeatCount: 'indefinite',
+        values: 'M90,52 Q186,52 282,52;M90,52 Q200,56 282,72;M90,52 Q186,52 282,52'
+      }, bow);
+    }
+    [206, 222, 238].forEach(function (x) {
+      S.arrow(x, 8, x, 46, { c: 'red', w: 1.8, head: 7 });
+      S.arrow(x, 116, x, 148, { c: 'red', w: 1.6, head: 6 });
+    });
+    S.text(250, 28, 'bolt load', { color: 'coral' });
+    S.text(24, 202, 'fixed along the weld', { color: 'faint' });
+    S.text(292, 92, 'deflection,', { color: 'coral', size: 11 });
+    S.text(292, 106, 'exaggerated', { color: 'coral', size: 11 });
+  };
+
+  /* PER control arm tab: a square edge clashes with the tube, a coped edge sits on it. */
+  SK['tab-cope'] = function (S) {
+    var r = 46;
+    [[86, 'square edge clashes', 'coral'], [258, 'coped to the tube', 'soft']].forEach(function (p, i) {
+      var cx = p[0], cy = 136, x0 = cx + 10, x1 = cx + 28;
+      var yA = cy - Math.sqrt(r * r - 100), yB = cy - Math.sqrt(r * r - 28 * 28);
+      S.circ(cx, cy, r * 2, { c: 'soft', w: 1.8, fill: 'wash', gap: 7 });
+      S.circ(cx, cy, r * 2 - 16, { c: 'faint', w: 1.1 });
+      if (i === 0) {
+        S.rect(x0, 34, x1 - x0, 70, { c: 'soft', w: 1.8 });
+        S.poly([[x0, yA], [x1, yB], [x1, 104], [x0, 104]], { c: 'red', w: 1.4, fill: C.redWash, style: 'solid', rough: 0.7 });
+      } else {
+        var g = S.group();
+        S.path('M' + x0 + ',34 L' + x1 + ',34 L' + x1 + ',' + yB.toFixed(1) + ' A' + r + ',' + r + ' 0 0,0 ' + x0 + ',' + yA.toFixed(1) + ' Z', { c: 'soft', w: 1.8 }, g);
+        if (!reduceMotion) g.setAttribute('class', 'sk-seat');
+      }
+      S.text(cx, 206, p[1], { color: p[2], anchor: 'middle' });
+    });
+  };
+
   /* RIPPLE, dependency graph: one plant, one precursor, six antibiotics. */
   SK['ripple-precursor'] = function (S) {
     S.factory(12, 92, { c: 'red', fill: C.redWash });
