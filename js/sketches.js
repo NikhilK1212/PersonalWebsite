@@ -633,57 +633,6 @@
     S.text(300, 208, 'chassis', { color: 'faint', anchor: 'middle' });
   };
 
-  /* PER K&C rig: the load path, I-beam anchor to turnbuckle to load cell to the rig at the hub. */
-  SK['kc-loadpath'] = function (S) {
-    S.rect(14, 176, S.W - 28, 12, { c: 'soft', w: 1.6, fill: 'wash', gap: 5 });
-    S.line(14, 196, S.W - 14, 196, { c: 'faint', w: 1.2 });
-    S.text(S.W - 18, 214, 'I-beam', { color: 'faint', anchor: 'end' });
-    S.rect(26, 140, 24, 36, { c: 'soft', w: 1.7, fill: 'wash', gap: 4 });
-    S.circ(48, 152, 7, { c: 'ink', w: 1.3 });
-    S.text(38, 214, 'bracket', { color: 'faint', anchor: 'middle' });
-    S.circ(62, 152, 12, { c: 'soft', w: 1.5 });
-    S.rect(70, 146, 46, 12, { c: 'soft', w: 1.6 });
-    S.rect(116, 142, 22, 20, { c: 'red', w: 1.7, fill: 'redwash', style: 'solid', rough: 0.8 });
-    S.rect(138, 146, 26, 12, { c: 'soft', w: 1.6 });
-    S.circ(172, 152, 12, { c: 'soft', w: 1.5 });
-    S.flow('M176,152 L58,152', { c: 'red', w: 1.6, dash: '5 8', opacity: 0.9 });
-    S.text(127, 124, 'load cell', { color: 'coral', anchor: 'middle' });
-    S.text(90, 138, 'turnbuckle', { color: 'faint', anchor: 'middle' });
-    S.text(120, 34, '~2700 N', { color: 'coral', size: 18, anchor: 'middle' });
-    S.arrow(160, 50, 90, 50, { c: 'red', w: 2, head: 9 });
-    S.line(184, 176, 204, 48, { c: 'soft', w: 2 });
-    S.line(224, 176, 204, 48, { c: 'soft', w: 2 });
-    S.line(178, 152, 230, 152, { c: 'soft', w: 1.8 });
-    S.rect(196, 70, 16, 70, { c: 'soft', w: 1.7, fill: 'wash', gap: 4 });
-    S.circ(214, 104, 26, { c: 'ink', w: 1.6 });
-    S.text(232, 58, 'rig at hub', { color: 'soft' });
-    S.line(226, 92, 280, 86, { c: 'soft', w: 1.8 });
-    S.line(226, 118, 280, 126, { c: 'soft', w: 1.8 });
-    S.rect(280, 66, 80, 76, { c: 'soft', w: 1.7, fill: 'wash', style: 'cross-hatch', gap: 9 });
-    S.poly([[300, 176], [340, 176], [320, 142]], { c: 'soft', w: 1.5 });
-    S.text(320, 58, 'chassis', { color: 'faint', anchor: 'middle' });
-  };
-
-  /* PER K&C rig: steering rack locked with a stack of slotted shims. */
-  SK['kc-lock'] = function (S) {
-    S.rect(16, 78, 110, 48, { c: 'soft', w: 1.8, fill: 'wash', gap: 6 });
-    S.text(71, 148, 'rack housing', { color: 'faint', anchor: 'middle' });
-    S.line(126, 102, S.W - 14, 102, { c: 'soft', w: 2.4 });
-    var x = 132, stack = [20, 20, 20, 20, 20, 10, 5], hs = S.group();
-    stack.forEach(function (w, i) {
-      S.rect(x, 66, w - 1.5, 72, { c: i % 2 ? 'red' : 'coral', w: 1.4, rough: 0.8 }, hs);
-      x += w;
-    });
-    if (!reduceMotion) hs.setAttribute('class', 'sk-seat');
-    var cl = x + 3;
-    S.rect(cl, 84, 30, 36, { c: 'soft', w: 1.8, fill: 'wash', gap: 4 });
-    S.circ(cl + 15, 102, 10, { c: 'ink', w: 1.4 });
-    S.text(cl + 15, 148, 'clevis', { color: 'faint', anchor: 'middle' });
-    S.dim(126, 50, cl, 50, '1.45 in', { off: -10 });
-    S.text(132, 172, '1/4, 1/8, 1/16 in shims', { color: 'coral' });
-    S.text(132, 190, '0.0125 in left over', { color: 'faint' });
-  };
-
   /* PER REV12 front ARB jig: notched plates seat on the frame tubes and hold both tabs. */
   SK['arb-jig'] = function (S) {
     S.rect(14, 122, S.W - 28, 22, { c: 'soft', w: 1.8, fill: 'wash', gap: 6 });
@@ -745,6 +694,453 @@
       }
       S.text(cx, 206, p[1], { color: p[2], anchor: 'middle' });
     });
+  };
+
+  /* ---------------- Isometric engine ----------------
+     Solids are extruded profiles (plates, boxes, tubes) in 3D, projected
+     isometrically and drawn back to front with rough.js. Faces get a solid
+     tone from a fixed light, shadow faces get a sketchy hachure on top. */
+
+  function v3add(a, b) { return [a[0] + b[0], a[1] + b[1], a[2] + b[2]]; }
+  function v3sub(a, b) { return [a[0] - b[0], a[1] - b[1], a[2] - b[2]]; }
+  function v3mul(a, k) { return [a[0] * k, a[1] * k, a[2] * k]; }
+  function v3dot(a, b) { return a[0] * b[0] + a[1] * b[1] + a[2] * b[2]; }
+  function v3cross(a, b) { return [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]]; }
+  function v3norm(a) { var l = Math.hypot(a[0], a[1], a[2]) || 1; return [a[0] / l, a[1] / l, a[2] / l]; }
+  var VIEW = [1, 1, 1];
+  var LIGHT = v3norm([-0.5, 0.35, 1]);
+  var TONE = {
+    blue: { dark: [21, 52, 84], light: [78, 132, 178], stroke: 'soft' },
+    red: { dark: [74, 40, 60], light: [190, 84, 78], stroke: 'red' },
+    steel: { dark: [34, 62, 92], light: [120, 160, 196], stroke: 'ink' }
+  };
+  function arcPts(cx, cy, r, a0, a1, n) {
+    var out = [];
+    for (var i = 0; i <= n; i++) {
+      var t = (a0 + (a1 - a0) * i / n) * Math.PI / 180;
+      out.push([cx + r * Math.cos(t), cy + r * Math.sin(t)]);
+    }
+    return out;
+  }
+
+  function Iso(S, opt) {
+    this.S = S; this.items = []; opt = opt || {};
+    this.pad = opt.pad != null ? opt.pad : 16;
+    this.padTop = opt.padTop != null ? opt.padTop : this.pad;
+    this.padBottom = opt.padBottom != null ? opt.padBottom : this.pad;
+  }
+  Iso.prototype.raw = function (p) { return [(p[0] - p[1]) * 0.8660254, (p[0] + p[1]) * 0.5 - p[2]]; };
+
+  // A flat profile in the (u, v) plane at o, extruded along u x v by depth.
+  Iso.prototype.prism = function (o, u, v, profile, depth, opts) {
+    opts = opts || {};
+    u = v3norm(u); v = v3norm(v);
+    var w = v3cross(u, v), n = profile.length, area = 0, i;
+    for (i = 0; i < n; i++) { var a = profile[i], b = profile[(i + 1) % n]; area += a[0] * b[1] - b[0] * a[1]; }
+    var pr = area < 0 ? profile.slice().reverse() : profile;
+    var P0 = pr.map(function (p) { return v3add(o, v3add(v3mul(u, p[0]), v3mul(v, p[1]))); });
+    var P1 = P0.map(function (p) { return v3add(p, v3mul(w, depth)); });
+    var faces = [{ pts: P0.slice().reverse(), n: v3mul(w, -1), cap: 0 }, { pts: P1, n: w, cap: 1 }];
+    for (i = 0; i < n; i++) {
+      var j = (i + 1) % n;
+      faces.push({ pts: [P0[i], P0[j], P1[j], P1[i]], n: v3norm(v3cross(v3sub(P0[j], P0[i]), w)), side: i });
+    }
+    this.items.push({ kind: 'solid', faces: faces, opts: opts, P0: P0, P1: P1, o: o, u: u, v: v, w: w, depth: depth });
+    return this;
+  };
+  Iso.prototype.box = function (p, d, opts) {
+    return this.prism(p, [1, 0, 0], [0, 1, 0], [[0, 0], [d[0], 0], [d[0], d[1]], [0, d[1]]], d[2], opts);
+  };
+  Iso.prototype.tube = function (p0, p1, r, opts) {
+    var w = v3norm(v3sub(p1, p0));
+    var ref = Math.abs(w[2]) < 0.9 ? [0, 0, 1] : [1, 0, 0];
+    var u = v3norm(v3cross(w, ref)), v = v3cross(w, u);
+    var len = Math.hypot(p1[0] - p0[0], p1[1] - p0[1], p1[2] - p0[2]);
+    var prof = arcPts(0, 0, r, 0, 360, (opts && opts.seg) || 22).slice(0, -1);
+    return this.prism(p0, u, v, prof, len, Object.assign({ smooth: true }, opts || {}));
+  };
+  // A disc drawn flat on a face: hole (dark) or ring (outline only).
+  Iso.prototype.disc = function (c, a, b, r, opts) {
+    var pts = arcPts(0, 0, r, 0, 360, 28).slice(0, -1).map(function (q) {
+      return v3add(c, v3add(v3mul(a, q[0]), v3mul(b, q[1])));
+    });
+    this.items.push({ kind: 'disc', pts: pts, opts: opts || {} });
+    return this;
+  };
+  Iso.prototype.patch = function (pts, opts) { this.items.push({ kind: 'patch', pts: pts, opts: opts || {} }); return this; };
+  // Box edges only, for big context parts that would hide the detail behind them.
+  Iso.prototype.wire = function (p, d, e) {
+    var x = [p[0], p[0] + d[0]], y = [p[1], p[1] + d[1]], z = [p[2], p[2] + d[2]], self = this;
+    e = e || { c: 'faint', w: 1.2, rough: 1 };
+    [0, 1].forEach(function (i) { [0, 1].forEach(function (j) {
+      self.line([x[0], y[i], z[j]], [x[1], y[i], z[j]], e);
+      self.line([x[i], y[0], z[j]], [x[i], y[1], z[j]], e);
+      self.line([x[i], y[j], z[0]], [x[i], y[j], z[1]], e);
+    }); });
+    return this;
+  };
+  Iso.prototype.line = function (p0, p1, e) { this.items.push({ kind: 'line', pts: [p0, p1], e: e }); return this; };
+  Iso.prototype.arrow = function (p0, p1, e) { this.items.push({ kind: 'arrow', pts: [p0, p1], e: e }); return this; };
+  Iso.prototype.dashed = function (pts, opt) { this.items.push({ kind: 'dashed', pts: pts, e: opt || {} }); return this; };
+  Iso.prototype.ticks = function (p0, p1, n, e) { this.items.push({ kind: 'ticks', pts: [p0, p1], n: n, e: e || {} }); return this; };
+  Iso.prototype.text = function (p, str, opt) { this.items.push({ kind: 'text', pts: [p], str: str, e: opt || {}, nofit: true }); return this; };
+  Iso.prototype.ring = function (p, r, opt) { this.items.push({ kind: 'ring', pts: [p], r: r, e: opt || {}, nofit: true }); return this; };
+
+  Iso.prototype.render = function () {
+    var S = this.S, self = this;
+    var x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9;
+    this.items.forEach(function (it) {
+      if (it.nofit) return;
+      var pts = it.kind === 'solid' ? it.P0.concat(it.P1) : it.pts;
+      pts.forEach(function (p) {
+        var q = self.raw(p);
+        x0 = Math.min(x0, q[0]); x1 = Math.max(x1, q[0]); y0 = Math.min(y0, q[1]); y1 = Math.max(y1, q[1]);
+      });
+    });
+    var s = Math.min((S.W - 2 * this.pad) / (x1 - x0), (S.H - this.padTop - this.padBottom) / (y1 - y0));
+    var ox = (S.W - (x1 - x0) * s) / 2 - x0 * s;
+    var oy = this.padTop + ((S.H - this.padTop - this.padBottom) - (y1 - y0) * s) / 2 - y0 * s;
+    var P = this.P = function (p) { var q = self.raw(p); return [ox + q[0] * s, oy + q[1] * s]; };
+    this.scale = s;
+
+    function faceOpts(fill, stroke, w, rough) {
+      var o = S.o({ w: w, rough: rough });
+      o.stroke = stroke; o.fill = fill; o.fillStyle = 'solid';
+      return o;
+    }
+    function shade(name, n) {
+      var T = TONE[name] || TONE.blue;
+      var t = Math.max(0, Math.min(1, (v3dot(n, LIGHT) + 1) / 2));
+      var c = T.dark.map(function (d, i) { return Math.round(d + (T.light[i] - d) * t); });
+      return { col: 'rgb(' + c.join(',') + ')', t: t, stroke: C[T.stroke] };
+    }
+    function hatch(pts2) {
+      var o = S.o({ w: 1, rough: 1.1 });
+      o.stroke = 'none'; o.fill = 'rgba(199, 220, 239, 0.26)'; o.fillStyle = 'hachure';
+      o.hachureGap = 5.5 * S.k; o.hachureAngle = -41; o.fillWeight = 0.85 * S.k;
+      S.put(S.rc.polygon(pts2, o));
+    }
+
+    this.items.forEach(function (it) {
+      var e = it.e || {};
+      if (it.kind === 'solid') {
+        var op = it.opts, tone = op.tone || 'blue';
+        var into = op.alpha ? S.group(S.draw, { opacity: op.alpha }) : S.draw;
+        var vis = it.faces.map(function (f) { return v3dot(f.n, VIEW) > 1e-6; });
+        var list = it.faces.filter(function (f, i) { return vis[i]; });
+        list.forEach(function (f) {
+          f.key = f.pts.reduce(function (acc, p) { return acc + v3dot(p, VIEW); }, 0) / f.pts.length;
+        });
+        list.sort(function (a, b) { return a.key - b.key; });
+        list.forEach(function (f) {
+          var pts2 = f.pts.map(P), sh = shade(tone, f.n);
+          if (op.smooth && f.side != null) {
+            S.put(S.rc.polygon(pts2, faceOpts(sh.col, sh.col, 1.3, 0.2)), into);
+          } else {
+            S.put(S.rc.polygon(pts2, faceOpts(sh.col, sh.stroke, op.w || 1.5, op.rough != null ? op.rough : 0.85)), into);
+          }
+          if (!op.nohatch && sh.t < 0.5 && !(op.smooth && f.side != null)) hatch(pts2);
+          if (f.cap != null && op.holes) {
+            op.holes.forEach(function (h) {
+              var c = v3add(it.o, v3add(v3mul(it.u, h[0]), v3mul(it.v, h[1])));
+              if (f.cap === 1) c = v3add(c, v3mul(it.w, it.depth));
+              var pts = arcPts(0, 0, h[2], 0, 360, 26).slice(0, -1).map(function (q) {
+                return P(v3add(c, v3add(v3mul(it.u, q[0]), v3mul(it.v, q[1]))));
+              });
+              S.put(S.rc.polygon(pts, faceOpts(C.bgDeep, sh.stroke, 1.2, 0.5)));
+            });
+          }
+        });
+        if (op.smooth) {
+          var n = it.P0.length, sideVis = [];
+          for (var i = 0; i < n; i++) sideVis.push(vis[i + 2]);
+          var T = TONE[tone] || TONE.blue;
+          for (i = 0; i < n; i++) {
+            if (sideVis[i] !== sideVis[(i - 1 + n) % n]) {
+              var a = P(it.P0[i]), b = P(it.P1[i]);
+              S.line(a[0], a[1], b[0], b[1], { c: T.stroke, w: op.w || 1.5, rough: 0.7 }, into);
+            }
+          }
+        }
+      } else if (it.kind === 'disc' || it.kind === 'patch') {
+        var o2 = it.opts, pts2 = it.pts.map(P), fo;
+        if (o2.red) {
+          fo = S.o({ c: 'red', w: 1.4, rough: 0.7 });
+          fo.fill = C.redWash; fo.fillStyle = 'solid';
+        } else if (o2.ring) {
+          fo = S.o({ c: o2.c || 'soft', w: 1.3, rough: 0.6 });
+        } else {
+          fo = faceOpts(C.bgDeep, C[o2.c || 'soft'], 1.2, 0.5);
+        }
+        S.put(S.rc.polygon(pts2, fo));
+      } else if (it.kind === 'line' || it.kind === 'arrow') {
+        var a2 = P(it.pts[0]), b2 = P(it.pts[1]);
+        S[it.kind](a2[0], a2[1], b2[0], b2[1], e);
+      } else if (it.kind === 'dashed') {
+        var d = it.pts.map(function (p, i) { var q = P(p); return (i ? 'L' : 'M') + q[0].toFixed(1) + ',' + q[1].toFixed(1); }).join(' ');
+        S.flow(d, Object.assign({ c: 'faint', dash: '4 5', still: true }, e));
+      } else if (it.kind === 'ticks') {
+        var p0 = it.pts[0], p1 = it.pts[1];
+        for (var k = 0; k <= it.n; k++) {
+          var q = P(v3add(p0, v3mul(v3sub(p1, p0), k / it.n)));
+          S.line(q[0], q[1], q[0] - 7, q[1] + 7, { c: e.c || 'faint', w: 1.1, rough: 0.6 });
+        }
+      } else if (it.kind === 'text') {
+        var t = P(it.pts[0]);
+        S.text(t[0] + (e.dx || 0), t[1] + (e.dy || 0), it.str, e);
+      } else if (it.kind === 'ring') {
+        var c2 = P(it.pts[0]);
+        S.ell(c2[0], c2[1], it.r * 2, it.r * 1.6, { c: e.c || 'red', w: 1.8, rough: 1.2 }, S.fx);
+      }
+    });
+    return this;
+  };
+
+  // A tube split into segments, so other parts can be layered between them.
+  function tubeSegs(I, x0, x1, y, z, r, cuts, opts) {
+    var pts = [x0].concat(cuts, [x1]), out = [];
+    for (var i = 0; i < pts.length - 1; i++) out.push([pts[i], pts[i + 1]]);
+    return out.map(function (s) { return function () { I.tube([s[0], y, z], [s[1], y, z], r, opts); }; });
+  }
+
+  /* ---- Isometric redraws of the PER figures ---- */
+
+  /* K&C: last season's rig, redrawn from the shop photos. */
+  SK['kc-iso-oldrig'] = function (S) {
+    var I = new Iso(S, { padTop: 30, padBottom: 26 });
+    I.box([-110, 0, 20], [70, 130, 70], {});
+    I.tube([-40, 40, 38], [40, 62, 42], 3.2, {});
+    I.tube([-40, 90, 38], [40, 66, 42], 3.2, {});
+    I.tube([-40, 40, 78], [40, 62, 74], 3.2, {});
+    I.tube([-40, 90, 78], [40, 66, 74], 3.2, {});
+    I.prism([96, 22, 2], [1, 0, 0], [0, 0, 1], [[0, 0], [44, 0], [0, 70]], 4, { tone: 'steel' });
+    I.box([60, 14, -4], [70, 102, 6], { tone: 'steel' });
+    I.tube([40, 64, 58], [60, 64, 58], 18, {});
+    I.prism([60, 64, 0], [0, 1, 0], [0, 0, 1], [[-40, 2], [40, 2], [26, 98], [-26, 98]], 5, { tone: 'steel', holes: [[0, 58, 6]] });
+    I.prism([66, 102, 2], [1, 0, 0], [0, 0, 1], [[0, 0], [44, 0], [0, 70]], 4, { tone: 'steel' });
+    I.box([60, 60, 100], [8, 8, 34], { tone: 'steel' });
+    I.box([-130, 60, 134], [210, 8, 8], { tone: 'steel' });
+    I.arrow([130, 64, 4], [220, 64, 4], { c: 'red', w: 2.2, head: 9 });
+    I.text([215, 64, 4], 'ratchet strap', { color: 'coral', dy: 22, anchor: 'end' });
+    I.text([-130, 64, 142], 'clamped extrusion', { color: 'faint', dy: -10 });
+    I.text([62, 64, 98], 'rig on the hub', { color: 'soft', dx: 16, dy: -16 });
+    I.text([-110, 130, 20], 'chassis', { color: 'faint', dx: -10, dy: 6, anchor: 'end' });
+    I.ring([50, 64, 58], 30, { c: 'red' });
+    I.text([50, 64, 30], 'wheel steered and spun', { color: 'coral', dx: -40, dy: 40, anchor: 'end' });
+    I.render();
+  };
+
+  /* K&C: the shim stack locking the steering rack. */
+  SK['kc-iso-shims'] = function (S) {
+    var I = new Iso(S, { padTop: 34, padBottom: 30 });
+    I.tube([-130, 0, 0], [-26, 0, 0], 22, {});
+    I.tube([-26, 0, 0], [-20, 0, 0], 13, {});
+    I.tube([-20, 0, 0], [60, 0, 0], 9, { tone: 'steel' });
+    var slot = [[30, -32], [30, 40], [9.4, 40]].concat(arcPts(0, 0, 9.4, 0, -180, 10).map(function (p) { return [p[0], p[1]]; }), [[-9.4, 40], [-30, 40], [-30, -32]]);
+    var x = -20;
+    [7.5, 7.5, 7.5, 7.5, 7.5, 3.75, 1.9].forEach(function (t, i) {
+      I.prism([x, 0, 0], [0, 1, 0], [0, 0, 1], slot, t - 0.6, { tone: 'red', nohatch: true, w: 1.3 });
+      x += t;
+    });
+    I.box([x + 1, -14, -14], [30, 28, 28], { tone: 'steel' });
+    I.tube([x + 16, -18, 0], [x + 16, 18, 0], 4, { tone: 'blue' });
+    I.tube([x + 31, 0, 0], [x + 90, 0, 0], 6, { tone: 'steel' });
+    I.line([-20, -30, 52], [x, -30, 52], { c: 'faint', w: 1.2 });
+    I.line([-20, -30, 46], [-20, -30, 58], { c: 'faint', w: 1.2 });
+    I.line([x, -30, 46], [x, -30, 58], { c: 'faint', w: 1.2 });
+    I.text([x, -30, 58], '1.45 in', { color: 'soft', dx: 8, dy: -6 });
+    I.text([-130, 0, -22], 'rack housing', { color: 'faint', dy: 20 });
+    I.text([x - 8, 30, -32], '1/4, 1/8, 1/16 in shims', { color: 'coral', dy: 24, anchor: 'middle' });
+    I.text([x + 30, 0, 14], 'clevis', { color: 'faint', dx: 6, dy: -12 });
+    I.render();
+  };
+
+  /* K&C: rig plate on the hub, spacer to the caliper mount. */
+  SK['kc-iso-hub'] = function (S) {
+    var I = new Iso(S, { padTop: 26, padBottom: 30 });
+    I.tube([-120, -20, 30], [-30, 0, 34], 3.4, {});
+    I.tube([-120, 30, 30], [-30, 6, 34], 3.4, {});
+    I.tube([-120, -20, -30], [-30, 0, -16], 3.4, {});
+    I.tube([-120, 30, -30], [-30, 6, -16], 3.4, {});
+    I.box([-34, -14, -24], [16, 28, 66], {});
+    I.tube([-18, 0, 10], [0, 0, 10], 24, {});
+    I.tube([0, 0, 10], [10, 0, 10], 36, {});
+    I.box([-18, 30, 38], [20, 16, 16], {});
+    I.tube([2, 38, 46], [18, 38, 46], 5, { tone: 'red' });
+    I.prism([18, -44, -60], [1, 0, 0], [0, 0, 1], [[0, 0], [55, 0], [0, 100]], 5, { tone: 'steel' });
+    var holes = [[0, 10, 11], [38, 46, 5]];
+    for (var i = 0; i < 6; i++) { var a = i * Math.PI / 3 + 0.5; holes.push([30 * Math.cos(a), 10 + 30 * Math.sin(a), 3.4]); }
+    I.prism([18, 0, 0], [0, 1, 0], [0, 0, 1], [[-70, -60], [70, -60], [48, 75], [-48, 75]], 5, { tone: 'steel', holes: holes });
+    I.prism([18, 44, -60], [1, 0, 0], [0, 0, 1], [[0, 0], [55, 0], [0, 100]], 5, { tone: 'steel' });
+    I.text([18, 60, 75], 'spacer to caliper mount', { color: 'coral', dx: 10, dy: -6 });
+    I.text([23, 70, -60], 'rig plate, rotor and caliper off', { color: 'faint', dx: -4, dy: 26, anchor: 'middle' });
+    I.text([-120, -20, 30], 'upright and hub, behind', { color: 'faint', dx: 6, dy: -14 });
+    I.render();
+  };
+
+  /* K&C: the full loading setup, I-beam, bracket, turnbuckle and load cell into the rig. */
+  SK['kc-iso-setup'] = function (S) {
+    var I = new Iso(S, { padTop: 34, padBottom: 30 });
+    var Ip = [[-15, 0], [15, 0], [15, 4], [2, 4], [2, 26], [15, 26], [15, 30], [-15, 30], [-15, 26], [-2, 26], [-2, 4], [-15, 4]];
+    [[-50, 40], [50, 40]].forEach(function (p) { I.tube([p[0], p[1], 0], [p[0], p[1], 60], 3.5, {}); });
+    I.prism([-160, 100, 0], [0, 1, 0], [0, 0, 1], Ip, 250, { tone: 'steel' });
+    I.wire([-65, 20, 60], [130, 180, 60]);
+    I.prism([10, 100, 30], [1, 0, 0], [0, 0, 1], [[0, 0], [14, 0], [14, 28], [0, 22]], 4, { tone: 'red' });
+    I.prism([-6, 86, 30], [1, 0, 0], [0, 1, 0], [[0, 0], [30, 0], [30, 28], [0, 28]], 4, { tone: 'red' });
+    I.tube([24, 100, 48], [62, 100, 48], 3, { tone: 'steel' });
+    I.box([62, 92, 40], [16, 16, 16], { tone: 'red' });
+    I.tube([78, 100, 48], [124, 100, 48], 5, { tone: 'steel' });
+    I.tube([65, 85, 82], [110, 100, 74], 3, {});
+    I.tube([65, 115, 82], [110, 100, 74], 3, {});
+    I.tube([100, 100, 72], [124, 100, 72], 20, {});
+    [[-50, 180], [50, 180]].forEach(function (p) { I.tube([p[0], p[1], 0], [p[0], p[1], 60], 3.5, {}); });
+    I.prism([150, 62, 4], [1, 0, 0], [0, 0, 1], [[0, 0], [-26, 0], [0, 76]], 4, { tone: 'steel' });
+    I.prism([124, 100, 0], [0, 1, 0], [0, 0, 1], [[-42, 4], [42, 4], [28, 112], [-28, 112]], 5, { tone: 'steel' });
+    I.box([120, 56, 0], [42, 88, 4], { tone: 'steel' });
+    I.prism([150, 140, 4], [1, 0, 0], [0, 0, 1], [[0, 0], [-26, 0], [0, 76]], 4, { tone: 'steel' });
+    I.arrow([110, 100, 160], [40, 100, 160], { c: 'red', w: 2.2, head: 9 });
+    I.text([75, 100, 160], '~2700 N', { color: 'coral', size: 16, anchor: 'middle', dy: -12 });
+    I.text([78, 108, 40], 'load cell', { color: 'coral', dx: -20, dy: 34, anchor: 'end' });
+    I.text([10, 100, 58], 'bracket', { color: 'coral', dx: -6, dy: -8, anchor: 'end' });
+    I.text([-160, 115, 0], 'I-beam', { color: 'faint', dx: -4, dy: 22 });
+    I.text([162, 144, 0], 'rig', { color: 'soft', dx: 6, dy: 14 });
+    I.text([-65, 20, 120], 'chassis on jack stands', { color: 'faint', dx: -6, dy: -8 });
+    I.render();
+  };
+
+  /* K&C: proposed bracket from the I-beam up to the rig. */
+  SK['kc-iso-bracket'] = function (S) {
+    var I = new Iso(S, { padTop: 30, padBottom: 40 });
+    var Ip = [[-20, 0], [20, 0], [20, 5], [3, 5], [3, 35], [20, 35], [20, 40], [-20, 40], [-20, 35], [-3, 35], [-3, 5], [-20, 5]];
+    I.prism([-60, 0, 0], [0, 1, 0], [0, 0, 1], Ip, 200, { tone: 'steel' });
+    I.prism([90, -22, 40], [1, 0, 0], [0, 1, 0], [[0, 0], [40, 0], [40, 44], [0, 44]], 5, { tone: 'red', holes: [[10, 10, 3.5], [30, 10, 3.5], [10, 34, 3.5], [30, 34, 3.5]] });
+    I.prism([126, 0, 45], [0, 1, 0], [0, 0, 1], [[-22, 0], [22, 0], [22, 80], [-22, 92]], 5, { tone: 'red', holes: [[0, 62, 5]] });
+    I.prism([90, 0, 45], [1, 0, 0], [0, 0, 1], [[0, 0], [36, 0], [36, 60]], 4, { tone: 'red' });
+    I.dashed([[131, 0, 107], [131, 0, 160]], { c: 'faint' });
+    I.text([131, 0, 160], 'up to the rig', { color: 'faint', dx: 8, dy: 4 });
+    I.text([90, -22, 44], 'bolted to the flange', { color: 'faint', dx: -12, dy: -14, anchor: 'end' });
+    I.text([-60, 0, 40], 'proposed bracket, sized with FEA', { color: 'coral', dy: -24 });
+    I.text([140, 20, 0], 'I-beam', { color: 'faint', dx: 8, dy: 10 });
+    I.render();
+  };
+
+  // The C shaped double shear tab, as a profile in (y, z) extruded along x.
+  var CTAB = [[10, -40], [80, -40], [80, -34], [16, -34], [16, 24], [80, 24], [80, 30], [10, 30]];
+
+  /* Control arm tab: C tab clashing with the frame tube. */
+  SK['tab-iso-clash'] = function (S) {
+    var I = new Iso(S, { padTop: 26, padBottom: 30 });
+    I.tube([-70, 0, 32], [40, 0, 32], 20, {});
+    I.prism([0, 0, 0], [0, 1, 0], [0, 0, 1], CTAB, 40, { tone: 'steel' });
+    I.disc([20, 56, 30.2], [1, 0, 0], [0, 1, 0], 7, {});
+    I.tube([40, 0, 32], [110, 0, 32], 20, {});
+    var ov = [[10, 30], [10, 14.7], [13, 16.8], [16, 20], [18, 23.3], [19.5, 27.6], [19.9, 30]];
+    I.patch(ov.map(function (p) { return [40.4, p[0], p[1]]; }), { red: true });
+    I.ring([40, 15, 24], 30, { c: 'red' });
+    I.text([40, 15, 24], 'clashes with the tube', { color: 'coral', dx: 40, dy: -26 });
+    I.text([110, 0, 32], 'frame tube', { color: 'faint', dy: 40, anchor: 'end' });
+    I.text([0, 80, -40], 'first C shaped tab', { color: 'faint', dx: -10, dy: 26, anchor: 'end' });
+    I.render();
+  };
+
+  /* Control arm tab: FEA setup, mesh on the faces, fixed weld edges, bolt load at the holes. */
+  SK['tab-iso-fea'] = function (S) {
+    var I = new Iso(S, { padTop: 30, padBottom: 30 });
+    I.prism([0, 0, 0], [0, 1, 0], [0, 0, 1], CTAB, 40, { tone: 'steel', nohatch: true });
+    var e = { c: 'faint', w: 0.7, rough: 0.4 };
+    var x, y, z;
+    for (x = 0; x <= 40; x += 10) I.line([x, 16, 30], [x, 80, 30], e);
+    for (y = 16; y <= 80; y += 10.67) I.line([0, y, 30], [40, y, 30], e);
+    for (x = 0; x < 40; x += 10) for (y = 16; y < 79; y += 10.67) I.line([x, y, 30], [x + 10, y + 10.67, 30], e);
+    for (x = 0; x <= 40; x += 10) I.line([x, 16, -34], [x, 16, 24], e);
+    for (z = -34; z <= 24; z += 9.67) I.line([0, 16, z], [40, 16, z], e);
+    I.disc([20, 56, 30.2], [1, 0, 0], [0, 1, 0], 7, {});
+    I.disc([20, 56, -33.8], [1, 0, 0], [0, 1, 0], 7, {});
+    [-8, 0, 8].forEach(function (d) {
+      I.arrow([20 + d, 56, 78], [20 + d, 56, 36], { c: 'red', w: 1.9, head: 7 });
+      I.arrow([20 + d, 56, -10], [20 + d, 56, -30], { c: 'red', w: 1.6, head: 6 });
+    });
+    I.ticks([40, 10, -40], [40, 10, 30], 8, { c: 'faint' });
+    I.text([28, 56, 78], 'bolt load', { color: 'coral', dx: 10, dy: 4 });
+    I.text([40, 10, -40], 'fixed along the weld', { color: 'faint', dx: -16, dy: 30 });
+    I.text([0, 80, 30], 'tetrahedral mesh', { color: 'soft', dx: -10, dy: 6, anchor: 'end' });
+    I.render();
+  };
+
+  /* Control arm tab: the revised bent tab with its coped edge sitting on the tube. */
+  SK['tab-iso-final'] = function (S) {
+    var I = new Iso(S, { padTop: 26, padBottom: 30 });
+    var cope = arcPts(35, 72, 31.8, -43.8, -136.2, 14);
+    var r = Math.hypot(23, 22);
+    I.tube([35, -80, 72], [35, -6, 72], r, {});
+    var vprof = [[0, 0], [70, 0], [70, 50]].concat(cope, [[0, 50]]);
+    I.prism([0, 0, 0], [1, 0, 0], [0, 0, 1], vprof, 5, { tone: 'steel' });
+    var hprof = [[0, 0], [70, 0], [70, 35]].concat(arcPts(50, 35, 20, 0, 90, 8), [[0, 55]]);
+    I.prism([0, 0, 0], [1, 0, 0], [0, 1, 0], hprof, 5, { tone: 'steel', holes: [[45, 30, 8]] });
+    I.tube([35, 0, 72], [35, 60, 72], r, { nohatch: true, alpha: 0.38 });
+    I.text([35, 60, 72], 'frame tube', { color: 'faint', dx: -40, dy: -46 });
+    I.text([70, 0, 50], 'coped edge', { color: 'coral', dx: 14, dy: 4 });
+    I.text([70, 0, 0], 'revised bent tab', { color: 'faint', dx: 14, dy: 10 });
+    I.render();
+  };
+
+  /* ARB jig: the jig seated on the frame tubes, holding the tabs. */
+  function arbUpright() {
+    var p = [[-20, -20], [25, -20], [25, 84], [-20, 84], [-20, 70], [0, 70]];
+    p = p.concat(arcPts(0, 60, 10, 90, -90, 10).slice(1), [[-20, 50], [-20, 10], [0, 10]]);
+    p = p.concat(arcPts(0, 0, 10, 90, -90, 10).slice(1), [[-20, -10]]);
+    return p;
+  }
+  var ARB_TAB = [[-8, 0], [8, 0], [8, 22]].concat(arcPts(0, 22, 8, 0, 180, 8).slice(1), [[-8, 22]]);
+  function tabProf(z0, z1) {
+    var top = ARB_TAB.map(function (p) { return [p[0], p[1] + 68]; });
+    return top.map(function (p) { return [p[0], Math.max(z0, Math.min(z1, p[1]))]; });
+  }
+
+  SK['arb-iso'] = function (S) {
+    var I = new Iso(S, { padTop: 30, padBottom: 28 });
+    var up = arbUpright(), tabsX = [-42, -30, 27, 39];
+    var lo = tubeSegs(I, -150, 150, 0, 0, 10, [-60, 60], {});
+    var hi = tubeSegs(I, -150, 150, 0, 60, 10, [-60, 60], {});
+    lo[0](); hi[0]();
+    I.prism([-60, 0, 0], [0, 1, 0], [0, 0, 1], up, 5, { tone: 'red' });
+    lo[1]();
+    I.box([-55, -15, 30], [110, 40, 4], { tone: 'red' });
+    hi[1]();
+    tabsX.forEach(function (x) { I.prism([x, 0, 0], [0, 1, 0], [0, 0, 1], tabProf(68, 84), 3, { tone: 'steel', nohatch: true }); });
+    I.prism([55, 0, 0], [0, 1, 0], [0, 0, 1], up, 5, { tone: 'red' });
+    I.box([-66, -16, 84], [132, 42, 5], { tone: 'red' });
+    tabsX.forEach(function (x) {
+      I.prism([x, 0, 0], [0, 1, 0], [0, 0, 1], tabProf(89, 100), 3, { tone: 'steel', nohatch: true, holes: [[0, 90, 3.6]] });
+    });
+    lo[2](); hi[2]();
+    I.text([-66, -16, 89], 'jig, laser cut MDF', { color: 'coral', dx: -6, dy: -30 });
+    I.text([39, 0, 100], 'ARB tabs', { color: 'soft', dx: 16, dy: -12 });
+    I.text([150, 0, 0], 'frame tubes', { color: 'faint', dy: 30, anchor: 'end' });
+    I.text([-60, -20, 84], 'notches find the tubes', { color: 'faint', dx: -12, dy: 4, anchor: 'end' });
+    I.render();
+  };
+
+  /* ARB jig: exploded, every part is a flat sheet. */
+  SK['arb-iso-parts'] = function (S) {
+    var I = new Iso(S, { padTop: 28, padBottom: 28 });
+    var up = arbUpright();
+    I.prism([-60, 0, 0], [0, 1, 0], [0, 0, 1], up, 5, { tone: 'red' });
+    I.box([-55, -15, 30], [110, 40, 4], { tone: 'red' });
+    I.prism([55, 0, 0], [0, 1, 0], [0, 0, 1], up, 5, { tone: 'red' });
+    I.box([-66, -16, 150], [132, 42, 5], { tone: 'red' });
+    [[-36, 0], [33, 0]].forEach(function (p) {
+      I.patch([[p[0] - 9, -9, 155.3], [p[0] + 9, -9, 155.3], [p[0] + 9, 9, 155.3], [p[0] - 9, 9, 155.3]], {});
+    });
+    [[-66, -16], [66, -16], [66, 26], [-66, 26]].forEach(function (c) { I.dashed([[c[0], c[1], 148], [c[0], c[1], 92]]); });
+    I.dashed(arcPts(0, 0, 10, 0, 360, 24).map(function (p) { return [-60, p[0], p[1] + 60]; }));
+    I.dashed(arcPts(0, 0, 10, 0, 360, 24).map(function (p) { return [-60, p[0], p[1]]; }));
+    I.dashed(arcPts(0, 0, 10, 0, 360, 24).map(function (p) { return [60, p[0], p[1] + 60]; }));
+    I.dashed(arcPts(0, 0, 10, 0, 360, 24).map(function (p) { return [60, p[0], p[1]]; }));
+    I.text([66, 26, 155], 'slotted top plate', { color: 'coral', dx: 10, dy: 6 });
+    I.text([60, 25, 0], 'notched uprights', { color: 'faint', dx: 10, dy: 20 });
+    I.text([55, 25, 34], 'cross plate', { color: 'faint', dx: 14, dy: 4 });
+    I.render();
   };
 
   /* RIPPLE, dependency graph: one plant, one precursor, six antibiotics. */
